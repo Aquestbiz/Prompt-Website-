@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquest Form & Prompt Generator</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom Smooth Transitions */
+        .transition-all-300 {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Hidden input elements handling with custom transitions */
+        .collapsible-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
+            opacity: 0;
+        }
+        .collapsible-section.show {
+            max-height: 1200px;
+            opacity: 1;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-[#0f172a] text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER -->
+    <header class="border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-tr from-indigo-500 to-rose-500 p-2.5 rounded-xl shadow-lg shadow-indigo-500/20">
+                    <i class="fa-solid fa-laptop-code text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">PromptCraft HTML</h1>
+                    <p class="text-[10px] text-slate-400 font-medium tracking-wider uppercase">Interactive HTML Form & Prompt Generator</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-semibold px-3 py-1.5 bg-slate-800/80 rounded-full border border-slate-700 text-indigo-300 flex items-center gap-1.5">
+                    <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span> Mode Aktif
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Hero Section Inside Dashboard -->
+        <div class="mb-8 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-[#1e1b4b] to-slate-900 border border-slate-800 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.1),transparent_45%)]"></div>
+            <div class="relative z-10 max-w-3xl">
+                <span class="text-indigo-400 text-xs font-bold uppercase tracking-widest bg-indigo-500/10 px-3 py-1 rounded-full">AI Prompt Companion</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-3 leading-tight">Pembuat Website Prompt Secara Interaktif</h2>
+                <p class="text-sm sm:text-base text-slate-300 mt-2">
+                    Lengkapi formulir di bawah ini dengan kustomisasi bisnis Anda. Kami akan otomatis menyusun kode instruksi prompt terstruktur yang siap Anda berikan langsung ke AI Developer Anda untuk membangun website impian Anda!
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- LEFT PANEL: FORM INPUTS -->
+            <section class="lg:col-span-7 bg-[#1e293b]/50 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur">
+                <div class="flex items-center gap-2.5 mb-6 pb-4 border-b border-slate-800">
+                    <i class="fa-solid fa-list-check text-indigo-400 text-lg"></i>
+                    <h3 class="font-bold text-lg text-white">Konfigurasi & Detail Konten Website</h3>
+                </div>
+
+                <form id="generatorForm" class="space-y-6" onsubmit="event.preventDefault();">
+                    
+                    <!-- Nama Perusahaan -->
+                    <div class="form-group flex flex-col gap-2">
+                        <label for="namaPerusahaan" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-building text-xs text-indigo-400"></i> Nama Perusahaan
+                        </label>
+                        <input type="text" id="namaPerusahaan" placeholder="Contoh: Sweet Bloom Florist / Golden Crust Bakery" 
+                            class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 placeholder:text-slate-500">
+                    </div>
+
+                    <!-- Testimonial -->
+                    <div class="form-group flex flex-col gap-2">
+                        <label for="testimonial" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-comment-quote text-xs text-indigo-400"></i> Contoh Testimonial Pelanggan
+                        </label>
+                        <textarea id="testimonial" rows="2" placeholder="Contoh: &quot;Bunga yang dikirim sangat segar dan rangkaiannya begitu indah! Layanan ramah.&quot; - Amanda, Bandung" 
+                            class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 placeholder:text-slate-500 resize-none"></textarea>
+                    </div>
+
+                    <!-- Menu Yang Di Jual -->
+                    <div class="form-group flex flex-col gap-2">
+                        <label for="menuDiJual" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-store text-xs text-indigo-400"></i> Deskripsi Jasa / Menu Utama Yang Dijual
+                        </label>
+                        <input type="text" id="menuDiJual" placeholder="Contoh: Buket Bunga Pernikahan, Dekorasi Event, Bunga Meja" 
+                            class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 placeholder:text-slate-500">
+                    </div>
+
+                    <!-- Gambar Produk yang di jual (Max 6 Menu) -->
+                    <div class="form-group flex flex-col gap-2 bg-[#0f172a]/60 p-5 rounded-2xl border border-slate-800">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-image text-xs text-indigo-400"></i> Link Gambar Produk Yang Dijual <span class="text-xs text-slate-500">(Maks 6 Menu)</span>
+                            </label>
+                            <button type="button" id="btnAddProductImg" class="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 px-2.5 py-1.5 rounded-lg border border-indigo-500/30 transition-all-300 flex items-center gap-1 cursor-pointer">
+                                <i class="fa-solid fa-plus text-[10px]"></i> Tambah Gambar
+                            </button>
+                        </div>
+                        
+                        <div id="productImagesContainer" class="space-y-3">
+                            <!-- Dynamic inputs will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Lokasi -->
+                    <div class="form-group flex flex-col gap-2">
+                        <label for="lokasi" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-map-location-dot text-xs text-indigo-400"></i> Lokasi Toko / Kantor Fisik
+                        </label>
+                        <input type="text" id="lokasi" placeholder="Contoh: Jl. Diponegoro No. 22, Bandung, Jawa Barat" 
+                            class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 placeholder:text-slate-500">
+                    </div>
+
+                    <!-- Pilihan Tema Warna & Gaya Visual Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Tema Warna -->
+                        <div class="form-group flex flex-col gap-2">
+                            <label for="temaWarna" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-palette text-xs text-indigo-400"></i> Tema Warna Website
+                            </label>
+                            <div class="relative">
+                                <select id="temaWarna" class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm appearance-none focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 cursor-pointer">
+                                    <option value="Dusty Rose" selected>Dusty Rose</option>
+                                    <option value="Black / Green">Black / Green</option>
+                                    <option value="Sage Green">Sage Green</option>
+                                    <option value="Champagne / Gold">Champagne / Gold</option>
+                                    <option value="Ivory / Off White">Ivory / Off White</option>
+                                    <option value="Blush Pink">Blush Pink</option>
+                                    <option value="Lavender / Lilac">Lavender / Lilac</option>
+                                    <option value="Emerald Green">Emerald Green</option>
+                                    <option value="Navy Blue">Navy Blue</option>
+                                    <option value="Terracotta / Burnt Orange">Terracotta / Burnt Orange</option>
+                                    <option value="Maroon / Wine Red">Maroon / Wine Red</option>
+                                    <option value="Peach / Coral">Peach / Coral</option>
+                                    <option value="Black & White">Black & White</option>
+                                    <option value="Dusty Blue">Dusty Blue</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gaya Visual -->
+                        <div class="form-group flex flex-col gap-2">
+                            <label for="gayaVisual" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles text-xs text-indigo-400"></i> Gaya Visual Desain
+                            </label>
+                            <div class="relative">
+                                <select id="gayaVisual" class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm appearance-none focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 cursor-pointer">
+                                    <option value="Minimalis elegan" selected>Minimalis elegan</option>
+                                    <option value="Rustic">Rustic</option>
+                                    <option value="Floral / Botanical">Floral / Botanical</option>
+                                    <option value="Modern glam">Modern glam</option>
+                                    <option value="Classic / Traditional">Classic / Traditional</option>
+                                    <option value="Bohemian">Bohemian</option>
+                                    <option value="Cute & Fun">Cute & Fun</option>
+                                    <option value="Kultural / Adat">Kultural / Adat</option>
+                                    <option value="Dark mode / Moody">Dark mode / Moody</option>
+                                    <option value="Monokrom hitam putih">Monokrom hitam putih</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Elemen Tambahan Checklist -->
+                    <div class="form-group flex flex-col gap-4 pt-2">
+                        <label class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-cubes text-xs text-indigo-400"></i> Elemen Konten yang Ingin Ditampilkan
+                        </label>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#0f172a]/80 p-5 rounded-2xl border border-slate-800">
+                            
+                            <!-- Nama Perusahaan Checkbox -->
+                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
+                                <input type="checkbox" id="elNama" value="Nama Perusahaan" checked class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 focus:ring-offset-slate-900 w-4 h-4 cursor-pointer accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-200">Nama Perusahaan</p>
+                                    <p class="text-[11px] text-slate-500">Menampilkan nama brand di Header & Hero</p>
+                                </div>
+                            </label>
+
+                            <!-- Hero Image Checkbox + Dinamis Link -->
+                            <div class="flex flex-col gap-2 p-3 rounded-xl hover:bg-slate-800/40 transition-all-300">
+                                <label class="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" id="elHero" value="Hero image" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
+                                    <div>
+                                        <p class="text-sm font-medium text-slate-200">Hero Image</p>
+                                        <p class="text-[11px] text-slate-500">Banner visual utama yang memikat</p>
+                                    </div>
+                                </label>
+                                <!-- Dinamis input Link Hero Image -->
+                                <div id="containerHeroLink" class="collapsible-section pl-7">
+                                    <input type="url" id="valHeroLink" placeholder="Masukkan URL Hero Image..." 
+                                        class="w-full bg-[#0f172a] border border-indigo-500/40 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                                </div>
+                            </div>
+
+                            <!-- Menu dan Harga Checkbox (Max 6 Menu) + Dinamis Inputs -->
+                            <div class="flex flex-col gap-2 p-3 rounded-xl hover:bg-slate-800/40 transition-all-300 md:col-span-2 border border-transparent hover:border-slate-800">
+                                <div class="flex justify-between items-center w-full">
+                                    <label class="flex items-start gap-3 cursor-pointer">
+                                        <input type="checkbox" id="elMenuHarga" value="Menu Yang Di Jual dengan harganya" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
+                                        <div>
+                                            <p class="text-sm font-medium text-slate-200">Menu & Daftar Harga Produk</p>
+                                            <p class="text-[11px] text-slate-500">Menyisipkan daftar produk dengan gambar dan harga (Maks 6)</p>
+                                        </div>
+                                    </label>
+                                    <button type="button" id="btnAddDetailedMenu" class="hidden text-[10px] bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-300 px-2 py-1 rounded-md border border-emerald-500/30 transition-all-300 flex items-center gap-1 cursor-pointer">
+                                        <i class="fa-solid fa-plus text-[8px]"></i> Tambah Menu & Harga
+                                    </button>
+                                </div>
+                                <!-- Dinamis Inputs Menu & Harga Container -->
+                                <div id="containerMenuHarga" class="collapsible-section pl-7 space-y-3">
+                                    <div id="detailedMenusList" class="space-y-4">
+                                        <!-- Dynamic menu fields with image and prices will go here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial Checkbox -->
+                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
+                                <input type="checkbox" id="elTesti" value="Testimonial" checked class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-200">Testimonial Pelanggan</p>
+                                    <p class="text-[11px] text-slate-500">Ulasan nyata pembeli untuk membangun reputasi</p>
+                                </div>
+                            </label>
+
+                            <!-- Live Chat Checkbox -->
+                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
+                                <input type="checkbox" id="elLiveChat" value="Live Chat" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-200">Tombol Live Chat</p>
+                                    <p class="text-[11px] text-slate-500">Integrasi percakapan instan (WhatsApp/Messenger)</p>
+                                </div>
+                            </label>
+
+                            <!-- Google Maps Checkbox -->
+                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
+                                <input type="checkbox" id="elMaps" value="Google Maps Lokasi" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-200">Google Maps Lokasi</p>
+                                    <p class="text-[11px] text-slate-500">Embed peta interaktif lokasi bisnis Anda</p>
+                                </div>
+                            </label>
+
+                            <!-- Ulasan Dan Saran Checkbox -->
+                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
+                                <input type="checkbox" id="elUcapan" value="Ulasan Dan Saran" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-200">Ulasan Dan Saran</p>
+                                    <p class="text-[11px] text-slate-500">Formulir bagi tamu untuk menuliskan kesan, kritik, atau saran</p>
+                                </div>
+                            </label>
+
+                            <!-- Keranjang Belanja Checkbox -->
+                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
+                                <input type="checkbox" id="elKeranjang" value="Market payment atau keranjang belanja" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-200">Keranjang Belanja & Pembayaran</p>
+                                    <p class="text-[11px] text-slate-500">Fitur cart belanjaan mini beserta opsi checkout payment</p>
+                                </div>
+                            </label>
+
+                            <!-- Analisis Grafik Checkbox -->
+                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
+                                <input type="checkbox" id="elGrafik" value="Analisis Grafik perkembangan perusahaan" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
+                                <div>
+                                    <p class="text-sm font-medium text-slate-200">Grafik Perkembangan Perusahaan</p>
+                                    <p class="text-[11px] text-slate-500">Visualisasi statistik pertumbuhan bisnis interaktif</p>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- RIGHT PANEL: LIVE PROMPT & ACTIONS -->
+            <section class="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
+                
+                <!-- Live Output Container -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+                    
+                    <!-- Output Header -->
+                    <div class="bg-slate-900/90 px-6 py-4 border-b border-slate-800 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <span class="flex h-2.5 w-2.5 relative">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+                            </span>
+                            <span class="font-bold text-xs uppercase tracking-widest text-slate-300">Live Prompt Preview</span>
+                        </div>
+                        <button id="btnSalin" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs py-2 px-4 rounded-lg flex items-center gap-2 transition-all-300 active:scale-95 shadow-md shadow-indigo-600/10 cursor-pointer">
+                            <i id="salinIcon" class="fa-regular fa-copy"></i>
+                            <span id="salinLabel">Salin Prompt</span>
+                        </button>
+                    </div>
+
+                    <!-- Prompt Display -->
+                    <div class="p-5">
+                        <div class="relative bg-slate-950 rounded-xl border border-slate-800/60 p-4">
+                            <textarea id="promptRawOutput" readonly rows="20" 
+                                class="w-full bg-transparent text-xs sm:text-sm font-mono text-indigo-200/90 focus:outline-none resize-y leading-relaxed border-0 p-0 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+                            </textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Guidance Info Box -->
+                <div class="bg-indigo-950/20 border border-indigo-900/35 rounded-2xl p-5 flex gap-4 items-start">
+                    <div class="text-indigo-400 p-1.5 bg-indigo-500/10 rounded-lg">
+                        <i class="fa-solid fa-circle-info text-base"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-200">Bagaimana Cara Menggunakannya?</h4>
+                        <ol class="text-xs text-slate-400 mt-1.5 space-y-1.5 list-decimal pl-4">
+                            <li>Isi detail nama perusahaan, lokasi, dan pilih paduan warna estetik Anda di panel kiri.</li>
+                            <li>Gunakan tombol <strong class="text-indigo-300">"Tambah"</strong> untuk mengunggah hingga 6 gambar produk atau melengkapi detail harga menu secara spesifik.</li>
+                            <li>Tandai komponen website apa saja yang ingin Anda munculkan.</li>
+                            <li>Klik <strong class="text-indigo-300">"Salin Prompt"</strong> dan tempelkan langsung</li>
+                        </ol>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Custom Toast Notification Box -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none z-50 flex items-center gap-3 bg-slate-900 border border-emerald-500/40 text-emerald-300 px-4 py-3 rounded-xl shadow-2xl shadow-emerald-950/20">
+        <div class="bg-emerald-500/10 text-emerald-400 p-1.5 rounded-lg">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+            <p class="text-xs font-bold text-slate-100">Berhasil Disalin!</p>
+            <p class="text-[10px] text-slate-400">Prompt siap di-paste.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 bg-[#0b0f19] py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:items-center">
+            <p class="text-xs text-slate-500">© 2026 PromptCraft Web Builder. Built for AQUEST TECH.</p>
+            <div class="flex gap-4 justify-center mt-3 sm:mt-0 text-slate-500 text-sm">
+                <a href="#" class="hover:text-indigo-400 transition-all-300"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hover:text-indigo-400 transition-all-300"><i class="fa-brands fa-discord"></i></a>
+                <a href="#" class="hover:text-indigo-400 transition-all-300"><i class="fa-solid fa-globe"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT SYSTEM LOGIC -->
+    <script>
+        // DOM Elements
+        const form = document.getElementById('generatorForm');
+        const namaPerusahaan = document.getElementById('namaPerusahaan');
+        const testimonial = document.getElementById('testimonial');
+        const menuDiJual = document.getElementById('menuDiJual');
+        const lokasi = document.getElementById('lokasi');
+        const temaWarna = document.getElementById('temaWarna');
+        const gayaVisual = document.getElementById('gayaVisual');
+
+        // Checkboxes & Dynamic Sub-Inputs elements
+        const elNama = document.getElementById('elNama');
+        const elHero = document.getElementById('elHero');
+        const valHeroLink = document.getElementById('valHeroLink');
+        const containerHeroLink = document.getElementById('containerHeroLink');
+
+        const elMenuHarga = document.getElementById('elMenuHarga');
+        const btnAddDetailedMenu = document.getElementById('btnAddDetailedMenu');
+        const containerMenuHarga = document.getElementById('containerMenuHarga');
+        const detailedMenusList = document.getElementById('detailedMenusList');
+
+        const elTesti = document.getElementById('elTesti');
+        const elLiveChat = document.getElementById('elLiveChat');
+        const elMaps = document.getElementById('elMaps');
+        const elUcapan = document.getElementById('elUcapan');
+        const elKeranjang = document.getElementById('elKeranjang');
+        const elGrafik = document.getElementById('elGrafik');
+
+        const productImagesContainer = document.getElementById('productImagesContainer');
+        const btnAddProductImg = document.getElementById('btnAddProductImg');
+
+        const promptRawOutput = document.getElementById('promptRawOutput');
+        const btnSalin = document.getElementById('btnSalin');
+        const toast = document.getElementById('toastNotification');
+
+        // State Trackers
+        let productImgCount = 0;
+        let detailedMenuCount = 0;
+
+        // Helper function: Add product image link field (Max 6)
+        function addProductImageField(defaultValue = "") {
+            if (productImgCount >= 6) return;
+            productImgCount++;
+            
+            const div = document.createElement('div');
+            div.className = 'flex items-center gap-2 transition-all-300 bg-[#1e293b]/60 p-2 rounded-xl border border-slate-800/80';
+            div.id = `product-img-group-${productImgCount}`;
+            div.innerHTML = `
+                <span class="text-xs font-semibold text-slate-500 w-6 text-center">#${productImgCount}</span>
+                <input type="url" placeholder="https://images.unsplash.com/photo-example-produk-${productImgCount}" 
+                    class="product-img-url flex-grow bg-[#0f172a] border border-slate-700/60 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                    value="${defaultValue}">
+                <button type="button" onclick="removeProductImageField('${div.id}')" class="text-xs text-rose-400 hover:text-rose-300 p-1.5 hover:bg-rose-500/10 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            `;
+            productImagesContainer.appendChild(div);
+            attachInputListeners(div.querySelector('.product-img-url'));
+            updatePrompt();
+        }
+
+        function removeProductImageField(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.remove();
+                productImgCount--;
+                reIndexProductImages();
+                updatePrompt();
+            }
+        }
+
+        function reIndexProductImages() {
+            const containers = productImagesContainer.children;
+            productImgCount = 0;
+            Array.from(containers).forEach((el, index) => {
+                productImgCount++;
+                el.id = `product-img-group-${productImgCount}`;
+                el.querySelector('span').innerText = `#${productImgCount}`;
+                const input = el.querySelector('input');
+                input.placeholder = `https://images.unsplash.com/photo-example-produk-${productImgCount}`;
+            });
+        }
+
+        // Helper function: Add detailed menu item with price and image (Max 6)
+        function addDetailedMenuField(name = "", price = "", imgUrl = "") {
+            if (detailedMenuCount >= 6) return;
+            detailedMenuCount++;
+
+            const div = document.createElement('div');
+            div.className = 'bg-[#0f172a] border border-slate-800 rounded-xl p-4 relative space-y-3 transition-all-300';
+            div.id = `detailed-menu-group-${detailedMenuCount}`;
+            div.innerHTML = `
+                <div class="flex justify-between items-center pb-2 border-b border-slate-800/60">
+                    <span class="text-xs font-bold text-indigo-400">Item Menu #${detailedMenuCount}</span>
+                    <button type="button" onclick="removeDetailedMenuField('${div.id}')" class="text-xs text-rose-400 hover:text-rose-300 px-2 py-1 hover:bg-rose-500/10 rounded-lg cursor-pointer">
+                        <i class="fa-solid fa-trash mr-1"></i> Hapus
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-slate-400 font-semibold uppercase">Nama Item</label>
+                        <input type="text" placeholder="Contoh: Premium Bouquet" class="menu-item-name w-full bg-[#1e293b] border border-slate-700/60 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500" value="${name}">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-slate-400 font-semibold uppercase">Banderol Harga</label>
+                        <input type="text" placeholder="Contoh: Rp 250.000" class="menu-item-price w-full bg-[#1e293b] border border-slate-700/60 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500" value="${price}">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-slate-400 font-semibold uppercase">URL Gambar Menu</label>
+                        <input type="url" placeholder="https://images.unsplash.com/..." class="menu-item-img w-full bg-[#1e293b] border border-slate-700/60 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500" value="${imgUrl}">
+                    </div>
+                </div>
+            `;
+            detailedMenusList.appendChild(div);
+            div.querySelectorAll('input').forEach(attachInputListeners);
+            updatePrompt();
+        }
+
+        function removeDetailedMenuField(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.remove();
+                detailedMenuCount--;
+                reIndexDetailedMenus();
+                updatePrompt();
+            }
+        }
+
+        function reIndexDetailedMenus() {
+            const containers = detailedMenusList.children;
+            detailedMenuCount = 0;
+            Array.from(containers).forEach((el, index) => {
+                detailedMenuCount++;
+                el.id = `detailed-menu-group-${detailedMenuCount}`;
+                el.querySelector('.text-indigo-400').innerText = `Item Menu #${detailedMenuCount}`;
+            });
+        }
+
+        // Dynamic Display logic for Hero image link input
+        elHero.addEventListener('change', () => {
+            if (elHero.checked) {
+                containerHeroLink.classList.add('show');
+            } else {
+                containerHeroLink.classList.remove('show');
+            }
+            updatePrompt();
+        });
+
+        // Dynamic Display logic for Menu and Price elements input
+        elMenuHarga.addEventListener('change', () => {
+            if (elMenuHarga.checked) {
+                containerMenuHarga.classList.add('show');
+                btnAddDetailedMenu.classList.remove('hidden');
+                // Auto create first detailed menu if empty
+                if (detailedMenuCount === 0) {
+                    addDetailedMenuField();
+                }
+            } else {
+                containerMenuHarga.classList.remove('show');
+                btnAddDetailedMenu.classList.add('hidden');
+            }
+            updatePrompt();
+        });
+
+        // Add Product Image Button trigger
+        btnAddProductImg.addEventListener('click', () => {
+            if (productImgCount < 6) {
+                addProductImageField();
+            }
+        });
+
+        // Add Detailed Menu Button trigger
+        btnAddDetailedMenu.addEventListener('click', () => {
+            if (detailedMenuCount < 6) {
+                addDetailedMenuField();
+            }
+        });
+
+        // Function helper to append input dynamic listener
+        function attachInputListeners(element) {
+            element.addEventListener('input', updatePrompt);
+            element.addEventListener('change', updatePrompt);
+        }
+
+        // Hook static inputs to update trigger
+        const staticInteractiveFields = [
+            namaPerusahaan, testimonial, menuDiJual, lokasi, temaWarna, gayaVisual,
+            elNama, valHeroLink, elTesti, elLiveChat, elMaps, elUcapan, elKeranjang, elGrafik
+        ];
+
+        staticInteractiveFields.forEach(element => {
+            element.addEventListener('input', updatePrompt);
+            element.addEventListener('change', updatePrompt);
+        });
+
+        // Form Engine compiler to build the single robust Prompt
+        function updatePrompt() {
+            // Read basic values & provide visual placeholders if blank
+            const nama = namaPerusahaan.value.trim() || "[Nama Perusahaan Anda]";
+            const testiSatu = testimonial.value.trim() || "[Masukkan testimonial di sini, misal: 'Pelayanan istimewa dan kualitas bintang lima!' - Customer A]";
+            const produkUtama = menuDiJual.value.trim() || "[Menu / Jasa utama yang dijual]";
+            const lokasiFisik = lokasi.value.trim() || "[Lokasi Toko atau Kota Layanan]";
+            const warna = temaWarna.value;
+            const gaya = gayaVisual.value;
+
+            // Gather Dynamic Product Images
+            const productImgInputs = document.querySelectorAll('.product-img-url');
+            let productImages = [];
+            productImgInputs.forEach((input, idx) => {
+                const val = input.value.trim();
+                if (val) {
+                    productImages.push(`- Gambar Produk #${idx+1}: ${val}`);
+                }
+            });
+            const listGambarProdukString = productImages.length > 0 ? productImages.join('\n') : "- Gambar Produk Utama: [Belum ada link gambar dimasukkan]";
+
+            // Optional Inputs Link & Details Check
+            const heroUrl = valHeroLink.value.trim() || "https://images.unsplash.com/photo-1513151233558-d860c5398176";
+
+            // Gather Dynamic Detailed Menus
+            let detailedMenusArray = [];
+            const menuContainers = detailedMenusList.children;
+            Array.from(menuContainers).forEach((el) => {
+                const itemName = el.querySelector('.menu-item-name').value.trim() || "[Nama Item]";
+                const itemPrice = el.querySelector('.menu-item-price').value.trim() || "[Harga Item]";
+                const itemImg = el.querySelector('.menu-item-img').value.trim() || "https://images.unsplash.com/photo-placeholder";
+                
+                detailedMenusArray.push(`     * **Item**: ${itemName} | **Harga**: ${itemPrice} | **Gambar URL**: ${itemImg}`);
+            });
+            const detailedMenusString = detailedMenusArray.length > 0 ? detailedMenusArray.join('\n') : "     * [Silakan isi data item menu & harga di form kiri]";
+
+            // Array containing checked sub elements list
+            let siseksiWebsite = [];
+
+            if (elNama.checked) {
+                siseksiWebsite.push(`   - **Seksi Identitas**: Tampilkan Logo dan Nama Perusahaan "${nama}" yang menonjol di bagian header navigasi.`);
+            }
+            if (elHero.checked) {
+                siseksiWebsite.push(`   - **Hero Section**: Visual banner utama interaktif dengan background atau ilustrasi gambar berkualitas tinggi dari tautan berikut: ${heroUrl}. Dilengkapi headline penawaran memikat dan tombol call-to-action (CTA).`);
+            }
+            if (elMenuHarga.checked) {
+                siseksiWebsite.push(`   - **Daftar Menu & Katalog Harga**: Menampilkan daftar menu dengan visual gambar pendukung serta rincian harga. Berikut adalah detail menu yang harus ditampilkan:\n${detailedMenusString}`);
+            }
+            if (elTesti.checked) {
+                siseksiWebsite.push(`   - **Testimonial Pelanggan**: Seksi modern interaktif carousel ulasan pelanggan. Masukkan testimoni ini sebagai sampel data awal: "${testiSatu}"`);
+            }
+            if (elLiveChat.checked) {
+                siseksiWebsite.push(`   - **Live Chat / WhatsApp Integration**: Tombol mengambang (floating action button) yang estetik untuk mengarahkan pengguna melakukan chat instan/konsultasi.`);
+            }
+            if (elMaps.checked) {
+                siseksiWebsite.push(`   - **Peta Lokasi Google Maps**: Masukkan peta lokasi atau representasi visual peta terintegrasi untuk alamat: "${lokasiFisik}"`);
+            }
+            if (elUcapan.checked) {
+                siseksiWebsite.push(`   - **Formulir Ulasan Dan Saran**: Area interaktif di mana pengunjung/tamu dapat menuliskan ulasan, kritik, saran, ataupun feedback secara virtual langsung di website.`);
+            }
+            if (elKeranjang.checked) {
+                siseksiWebsite.push(`   - **Sistem Keranjang Belanja & Checkout Pembayaran**: Keranjang belanja mini dinamis berbasis client-side untuk mempermudah tamu memilih menu dan mengarahkan ke gerbang pembayaran online sederhana atau checkout ke admin.`);
+            }
+            if (elGrafik.checked) {
+                siseksiWebsite.push(`   - **Analisis Grafik Perkembangan Perusahaan**: Grafik statistik interaktif (bisa menggunakan pustaka visualisasi seperti Chart.js atau visual SVG) yang menampilkan grafik pertumbuhan positif performa perusahaan.`);
+            }
+
+            // Create formatted list string
+            const listSeksiString = siseksiWebsite.length > 0 ? siseksiWebsite.join("\n") : "   - [Pilihlah salah satu elemen konten di sebelah kiri untuk menyusun struktur utama website]";
+
+            // Combine into the requested template format
+            const compiledPrompt = `Saya ingin kamu bertindak sebagai seorang frontend developer profesional yang membuat website. Website ini harus memiliki desain yang modern, elegan, dan responsif (mobile-first). Gunakan efek animasi halus saat scroll, parallax ringan, serta transisi yang lembut. Website mencakup beberapa bagian utama seperti:
+
+--- IDENTITAS UTAMA WEBSITE ---
+• Nama Perusahaan: ${nama}
+• Jasa/Menu Utama: ${produkUtama}
+• Lokasi Kantor/Toko: ${lokasiFisik}
+
+--- DETAIL GAMBAR PRODUK UTAMA ---
+${listGambarProdukString}
+
+--- ATRIBUT DESIGN & GAYA VISUAL ---
+• Tema Warna Utama: ${warna}
+• Gaya Visual Pilihan: ${gaya}
+
+--- DETAIL SEKSI KONTEN WEBSITE YANG HARUS DIBUAT ---
+${listSeksiString}
+
+Mohon buat kode implementasi website ini secara komprehensif, pastikan website tampak cantik di perangkat seluler ataupun desktop, memiliki tata letak premium berkelas, serta selaraskan tema warna "${warna}" dan gaya visual "${gaya}" ke dalam skema palet desain Anda!`;
+
+            promptRawOutput.value = compiledPrompt;
+        }
+
+        // Advanced Copy to clipboard logic using robust fallbacks for iFrame systems
+        btnSalin.addEventListener('click', () => {
+            const textToCopy = promptRawOutput.value;
+            
+            // Temporary Textarea approach (highly compatible within nested environments / iFrames)
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            // Prevent scrolling to bottom
+            tempTextArea.style.top = "0";
+            tempTextArea.style.left = "0";
+            tempTextArea.style.position = "fixed";
+            document.body.appendChild(tempTextArea);
+            tempTextArea.focus();
+            tempTextArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToastNotification();
+                } else {
+                    console.error('Gagal menyalin teks dengan standard command.');
+                }
+            } catch (err) {
+                console.error('Kesalahan penyalinan:', err);
+            }
+
+            document.body.removeChild(tempTextArea);
+        });
+
+        // Trigger premium dynamic toast animation
+        function showToastNotification() {
+            // Update button label state
+            const salinIcon = document.getElementById('salinIcon');
+            const salinLabel = document.getElementById('salinLabel');
+            
+            salinIcon.className = "fa-solid fa-check text-emerald-400";
+            salinLabel.innerText = "Tersalin!";
+            btnSalin.classList.remove('bg-indigo-600', 'hover:bg-indigo-500');
+            btnSalin.classList.add('bg-emerald-600/90', 'hover:bg-emerald-600');
+
+            // Slide up and reveal visual Toast box
+            toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                // Reset button state
+                salinIcon.className = "fa-regular fa-copy";
+                salinLabel.innerText = "Salin Prompt";
+                btnSalin.classList.remove('bg-emerald-600/90', 'hover:bg-emerald-600');
+                btnSalin.classList.add('bg-indigo-600', 'hover:bg-indigo-500');
+
+                // Dismiss Toast box
+                toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        // Initialize with default fields on load
+        window.onload = function() {
+            // Add initial empty fields
+            addProductImageField();
+            // Start compilation
+            updatePrompt();
+        };
+    </script>
+</body>
+</html>
