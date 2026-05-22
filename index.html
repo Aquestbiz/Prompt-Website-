@@ -3,740 +3,1094 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aquest Form & Prompt Generator</title>
+    <title>AQUEST TECH - Undangan Digital & Website Premium</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts (Inter) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#09090b',
+                            card: '#121214',
+                            green: '#10b981', // emerald-500
+                            neon: '#34d399', // emerald-400
+                            muted: '#94a3b8',
+                            glow: 'rgba(16, 185, 129, 0.15)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite alternate',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 5px rgba(16, 185, 129, 0.2)' },
+                            '100%': { boxShadow: '0 0 20px rgba(16, 185, 129, 0.6)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #09090b;
+            color: #f4f4f5;
+            overflow-x: hidden;
         }
-        /* Custom Smooth Transitions */
-        .transition-all-300 {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        /* Hidden input elements handling with custom transitions */
-        .collapsible-section {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+        /* Reveal animations */
+        .reveal-element {
             opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .collapsible-section.show {
-            max-height: 1200px;
+        .reveal-element.active {
             opacity: 1;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-[#0f172a] text-slate-100 min-h-screen flex flex-col justify-between">
+<body class="relative min-h-screen">
 
-    <!-- HEADER -->
-    <header class="border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-tr from-indigo-500 to-rose-500 p-2.5 rounded-xl shadow-lg shadow-indigo-500/20">
-                    <i class="fa-solid fa-laptop-code text-white text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-lg leading-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">PromptCraft HTML</h1>
-                    <p class="text-[10px] text-slate-400 font-medium tracking-wider uppercase">Interactive HTML Form & Prompt Generator</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <span class="text-xs font-semibold px-3 py-1.5 bg-slate-800/80 rounded-full border border-slate-700 text-indigo-300 flex items-center gap-1.5">
-                    <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span> Mode Aktif
-                </span>
-            </div>
-        </div>
-    </header>
-
-    <!-- MAIN CONTENT -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        <!-- Hero Section Inside Dashboard -->
-        <div class="mb-8 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-[#1e1b4b] to-slate-900 border border-slate-800 relative overflow-hidden">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.1),transparent_45%)]"></div>
-            <div class="relative z-10 max-w-3xl">
-                <span class="text-indigo-400 text-xs font-bold uppercase tracking-widest bg-indigo-500/10 px-3 py-1 rounded-full">AI Prompt Companion</span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-3 leading-tight">Pembuat Website Prompt Secara Interaktif</h2>
-                <p class="text-sm sm:text-base text-slate-300 mt-2">
-                    Lengkapi formulir di bawah ini dengan kustomisasi bisnis Anda. Kami akan otomatis menyusun kode instruksi prompt terstruktur yang siap Anda berikan langsung ke AI Developer Anda untuk membangun website impian Anda!
-                </p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- LEFT PANEL: FORM INPUTS -->
-            <section class="lg:col-span-7 bg-[#1e293b]/50 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur">
-                <div class="flex items-center gap-2.5 mb-6 pb-4 border-b border-slate-800">
-                    <i class="fa-solid fa-list-check text-indigo-400 text-lg"></i>
-                    <h3 class="font-bold text-lg text-white">Konfigurasi & Detail Konten Website</h3>
-                </div>
-
-                <form id="generatorForm" class="space-y-6" onsubmit="event.preventDefault();">
-                    
-                    <!-- Nama Perusahaan -->
-                    <div class="form-group flex flex-col gap-2">
-                        <label for="namaPerusahaan" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-building text-xs text-indigo-400"></i> Nama Perusahaan
-                        </label>
-                        <input type="text" id="namaPerusahaan" placeholder="Contoh: Sweet Bloom Florist / Golden Crust Bakery" 
-                            class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 placeholder:text-slate-500">
-                    </div>
-
-                    <!-- Testimonial -->
-                    <div class="form-group flex flex-col gap-2">
-                        <label for="testimonial" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-comment-quote text-xs text-indigo-400"></i> Contoh Testimonial Pelanggan
-                        </label>
-                        <textarea id="testimonial" rows="2" placeholder="Contoh: &quot;Bunga yang dikirim sangat segar dan rangkaiannya begitu indah! Layanan ramah.&quot; - Amanda, Bandung" 
-                            class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 placeholder:text-slate-500 resize-none"></textarea>
-                    </div>
-
-                    <!-- Menu Yang Di Jual -->
-                    <div class="form-group flex flex-col gap-2">
-                        <label for="menuDiJual" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-store text-xs text-indigo-400"></i> Deskripsi Jasa / Menu Utama Yang Dijual
-                        </label>
-                        <input type="text" id="menuDiJual" placeholder="Contoh: Buket Bunga Pernikahan, Dekorasi Event, Bunga Meja" 
-                            class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 placeholder:text-slate-500">
-                    </div>
-
-                    <!-- Gambar Produk yang di jual (Max 6 Menu) -->
-                    <div class="form-group flex flex-col gap-2 bg-[#0f172a]/60 p-5 rounded-2xl border border-slate-800">
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="text-sm font-semibold text-slate-300 flex items-center gap-2">
-                                <i class="fa-solid fa-image text-xs text-indigo-400"></i> Link Gambar Produk Yang Dijual <span class="text-xs text-slate-500">(Maks 6 Menu)</span>
-                            </label>
-                            <button type="button" id="btnAddProductImg" class="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 px-2.5 py-1.5 rounded-lg border border-indigo-500/30 transition-all-300 flex items-center gap-1 cursor-pointer">
-                                <i class="fa-solid fa-plus text-[10px]"></i> Tambah Gambar
-                            </button>
-                        </div>
-                        
-                        <div id="productImagesContainer" class="space-y-3">
-                            <!-- Dynamic inputs will be inserted here -->
-                        </div>
-                    </div>
-
-                    <!-- Lokasi -->
-                    <div class="form-group flex flex-col gap-2">
-                        <label for="lokasi" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-map-location-dot text-xs text-indigo-400"></i> Lokasi Toko / Kantor Fisik
-                        </label>
-                        <input type="text" id="lokasi" placeholder="Contoh: Jl. Diponegoro No. 22, Bandung, Jawa Barat" 
-                            class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 placeholder:text-slate-500">
-                    </div>
-
-                    <!-- Pilihan Tema Warna & Gaya Visual Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        
-                        <!-- Tema Warna -->
-                        <div class="form-group flex flex-col gap-2">
-                            <label for="temaWarna" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
-                                <i class="fa-solid fa-palette text-xs text-indigo-400"></i> Tema Warna Website
-                            </label>
-                            <div class="relative">
-                                <select id="temaWarna" class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm appearance-none focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 cursor-pointer">
-                                    <option value="Dusty Rose" selected>Dusty Rose</option>
-                                    <option value="Black / Green">Black / Green</option>
-                                    <option value="Sage Green">Sage Green</option>
-                                    <option value="Champagne / Gold">Champagne / Gold</option>
-                                    <option value="Ivory / Off White">Ivory / Off White</option>
-                                    <option value="Blush Pink">Blush Pink</option>
-                                    <option value="Lavender / Lilac">Lavender / Lilac</option>
-                                    <option value="Emerald Green">Emerald Green</option>
-                                    <option value="Navy Blue">Navy Blue</option>
-                                    <option value="Terracotta / Burnt Orange">Terracotta / Burnt Orange</option>
-                                    <option value="Maroon / Wine Red">Maroon / Wine Red</option>
-                                    <option value="Peach / Coral">Peach / Coral</option>
-                                    <option value="Black & White">Black & White</option>
-                                    <option value="Dusty Blue">Dusty Blue</option>
-                                </select>
-                                <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
-                                    <i class="fa-solid fa-chevron-down text-xs"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Gaya Visual -->
-                        <div class="form-group flex flex-col gap-2">
-                            <label for="gayaVisual" class="text-sm font-semibold text-slate-300 flex items-center gap-2">
-                                <i class="fa-solid fa-wand-magic-sparkles text-xs text-indigo-400"></i> Gaya Visual Desain
-                            </label>
-                            <div class="relative">
-                                <select id="gayaVisual" class="w-full bg-[#0f172a] border border-slate-700/60 rounded-xl px-4 py-3 text-slate-200 text-sm appearance-none focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all-300 cursor-pointer">
-                                    <option value="Minimalis elegan" selected>Minimalis elegan</option>
-                                    <option value="Rustic">Rustic</option>
-                                    <option value="Floral / Botanical">Floral / Botanical</option>
-                                    <option value="Modern glam">Modern glam</option>
-                                    <option value="Classic / Traditional">Classic / Traditional</option>
-                                    <option value="Bohemian">Bohemian</option>
-                                    <option value="Cute & Fun">Cute & Fun</option>
-                                    <option value="Kultural / Adat">Kultural / Adat</option>
-                                    <option value="Dark mode / Moody">Dark mode / Moody</option>
-                                    <option value="Monokrom hitam putih">Monokrom hitam putih</option>
-                                </select>
-                                <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
-                                    <i class="fa-solid fa-chevron-down text-xs"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Elemen Tambahan Checklist -->
-                    <div class="form-group flex flex-col gap-4 pt-2">
-                        <label class="text-sm font-semibold text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-cubes text-xs text-indigo-400"></i> Elemen Konten yang Ingin Ditampilkan
-                        </label>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#0f172a]/80 p-5 rounded-2xl border border-slate-800">
-                            
-                            <!-- Nama Perusahaan Checkbox -->
-                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
-                                <input type="checkbox" id="elNama" value="Nama Perusahaan" checked class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 focus:ring-offset-slate-900 w-4 h-4 cursor-pointer accent-indigo-500">
-                                <div>
-                                    <p class="text-sm font-medium text-slate-200">Nama Perusahaan</p>
-                                    <p class="text-[11px] text-slate-500">Menampilkan nama brand di Header & Hero</p>
-                                </div>
-                            </label>
-
-                            <!-- Hero Image Checkbox + Dinamis Link -->
-                            <div class="flex flex-col gap-2 p-3 rounded-xl hover:bg-slate-800/40 transition-all-300">
-                                <label class="flex items-start gap-3 cursor-pointer">
-                                    <input type="checkbox" id="elHero" value="Hero image" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
-                                    <div>
-                                        <p class="text-sm font-medium text-slate-200">Hero Image</p>
-                                        <p class="text-[11px] text-slate-500">Banner visual utama yang memikat</p>
-                                    </div>
-                                </label>
-                                <!-- Dinamis input Link Hero Image -->
-                                <div id="containerHeroLink" class="collapsible-section pl-7">
-                                    <input type="url" id="valHeroLink" placeholder="Masukkan URL Hero Image..." 
-                                        class="w-full bg-[#0f172a] border border-indigo-500/40 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
-                                </div>
-                            </div>
-
-                            <!-- Menu dan Harga Checkbox (Max 6 Menu) + Dinamis Inputs -->
-                            <div class="flex flex-col gap-2 p-3 rounded-xl hover:bg-slate-800/40 transition-all-300 md:col-span-2 border border-transparent hover:border-slate-800">
-                                <div class="flex justify-between items-center w-full">
-                                    <label class="flex items-start gap-3 cursor-pointer">
-                                        <input type="checkbox" id="elMenuHarga" value="Menu Yang Di Jual dengan harganya" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
-                                        <div>
-                                            <p class="text-sm font-medium text-slate-200">Menu & Daftar Harga Produk</p>
-                                            <p class="text-[11px] text-slate-500">Menyisipkan daftar produk dengan gambar dan harga (Maks 6)</p>
-                                        </div>
-                                    </label>
-                                    <button type="button" id="btnAddDetailedMenu" class="hidden text-[10px] bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-300 px-2 py-1 rounded-md border border-emerald-500/30 transition-all-300 flex items-center gap-1 cursor-pointer">
-                                        <i class="fa-solid fa-plus text-[8px]"></i> Tambah Menu & Harga
-                                    </button>
-                                </div>
-                                <!-- Dinamis Inputs Menu & Harga Container -->
-                                <div id="containerMenuHarga" class="collapsible-section pl-7 space-y-3">
-                                    <div id="detailedMenusList" class="space-y-4">
-                                        <!-- Dynamic menu fields with image and prices will go here -->
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Testimonial Checkbox -->
-                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
-                                <input type="checkbox" id="elTesti" value="Testimonial" checked class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
-                                <div>
-                                    <p class="text-sm font-medium text-slate-200">Testimonial Pelanggan</p>
-                                    <p class="text-[11px] text-slate-500">Ulasan nyata pembeli untuk membangun reputasi</p>
-                                </div>
-                            </label>
-
-                            <!-- Live Chat Checkbox -->
-                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
-                                <input type="checkbox" id="elLiveChat" value="Live Chat" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
-                                <div>
-                                    <p class="text-sm font-medium text-slate-200">Tombol Live Chat</p>
-                                    <p class="text-[11px] text-slate-500">Integrasi percakapan instan (WhatsApp/Messenger)</p>
-                                </div>
-                            </label>
-
-                            <!-- Google Maps Checkbox -->
-                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
-                                <input type="checkbox" id="elMaps" value="Google Maps Lokasi" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
-                                <div>
-                                    <p class="text-sm font-medium text-slate-200">Google Maps Lokasi</p>
-                                    <p class="text-[11px] text-slate-500">Embed peta interaktif lokasi bisnis Anda</p>
-                                </div>
-                            </label>
-
-                            <!-- Ulasan Dan Saran Checkbox -->
-                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
-                                <input type="checkbox" id="elUcapan" value="Ulasan Dan Saran" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
-                                <div>
-                                    <p class="text-sm font-medium text-slate-200">Ulasan Dan Saran</p>
-                                    <p class="text-[11px] text-slate-500">Formulir bagi tamu untuk menuliskan kesan, kritik, atau saran</p>
-                                </div>
-                            </label>
-
-                            <!-- Keranjang Belanja Checkbox -->
-                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
-                                <input type="checkbox" id="elKeranjang" value="Market payment atau keranjang belanja" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
-                                <div>
-                                    <p class="text-sm font-medium text-slate-200">Keranjang Belanja & Pembayaran</p>
-                                    <p class="text-[11px] text-slate-500">Fitur cart belanjaan mini beserta opsi checkout payment</p>
-                                </div>
-                            </label>
-
-                            <!-- Analisis Grafik Checkbox -->
-                            <label class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-800/40 cursor-pointer transition-all-300">
-                                <input type="checkbox" id="elGrafik" value="Analisis Grafik perkembangan perusahaan" class="mt-1 rounded text-indigo-500 bg-slate-900 border-slate-700 focus:ring-indigo-500 w-4 h-4 cursor-pointer accent-indigo-500">
-                                <div>
-                                    <p class="text-sm font-medium text-slate-200">Grafik Perkembangan Perusahaan</p>
-                                    <p class="text-[11px] text-slate-500">Visualisasi statistik pertumbuhan bisnis interaktif</p>
-                                </div>
-                            </label>
-
-                        </div>
-                    </div>
-
-                </form>
-            </section>
-
-            <!-- RIGHT PANEL: LIVE PROMPT & ACTIONS -->
-            <section class="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
-                
-                <!-- Live Output Container -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
-                    
-                    <!-- Output Header -->
-                    <div class="bg-slate-900/90 px-6 py-4 border-b border-slate-800 flex justify-between items-center">
-                        <div class="flex items-center gap-2">
-                            <span class="flex h-2.5 w-2.5 relative">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
-                            </span>
-                            <span class="font-bold text-xs uppercase tracking-widest text-slate-300">Live Prompt Preview</span>
-                        </div>
-                        <button id="btnSalin" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs py-2 px-4 rounded-lg flex items-center gap-2 transition-all-300 active:scale-95 shadow-md shadow-indigo-600/10 cursor-pointer">
-                            <i id="salinIcon" class="fa-regular fa-copy"></i>
-                            <span id="salinLabel">Salin Prompt</span>
-                        </button>
-                    </div>
-
-                    <!-- Prompt Display -->
-                    <div class="p-5">
-                        <div class="relative bg-slate-950 rounded-xl border border-slate-800/60 p-4">
-                            <textarea id="promptRawOutput" readonly rows="20" 
-                                class="w-full bg-transparent text-xs sm:text-sm font-mono text-indigo-200/90 focus:outline-none resize-y leading-relaxed border-0 p-0 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
-                            </textarea>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Guidance Info Box -->
-                <div class="bg-indigo-950/20 border border-indigo-900/35 rounded-2xl p-5 flex gap-4 items-start">
-                    <div class="text-indigo-400 p-1.5 bg-indigo-500/10 rounded-lg">
-                        <i class="fa-solid fa-circle-info text-base"></i>
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-zinc-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo / Identity -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-green to-brand-neon flex items-center justify-center shadow-lg shadow-brand-green/20">
+                        <i data-lucide="terminal" class="w-6 h-6 text-brand-dark"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-sm text-slate-200">Bagaimana Cara Menggunakannya?</h4>
-                        <ol class="text-xs text-slate-400 mt-1.5 space-y-1.5 list-decimal pl-4">
-                            <li>Isi detail nama perusahaan, lokasi, dan pilih paduan warna estetik Anda di panel kiri.</li>
-                            <li>Gunakan tombol <strong class="text-indigo-300">"Tambah"</strong> untuk mengunggah hingga 6 gambar produk atau melengkapi detail harga menu secara spesifik.</li>
-                            <li>Tandai komponen website apa saja yang ingin Anda munculkan.</li>
-                            <li>Klik <strong class="text-indigo-300">"Salin Prompt"</strong> dan tempelkan langsung</li>
-                        </ol>
+                        <span class="text-xl font-extrabold tracking-wider font-heading text-white">
+                            AQUEST <span class="text-brand-neon">TECH</span>
+                        </span>
+                        <p class="text-[9px] text-brand-muted tracking-widest uppercase -mt-1">Digital Solutions</p>
                     </div>
                 </div>
 
-            </section>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8 font-medium text-sm">
+                    <a href="#hero" class="text-zinc-300 hover:text-brand-neon transition">Home</a>
+                    <a href="#catalog" class="text-zinc-300 hover:text-brand-neon transition">Layanan & Harga</a>
+                    <a href="#statistics" class="text-zinc-300 hover:text-brand-neon transition">Grafik Kinerja</a>
+                    <a href="#testimonials" class="text-zinc-300 hover:text-brand-neon transition">Ulasan</a>
+                    <a href="#location" class="text-zinc-300 hover:text-brand-neon transition">Kontak & Lokasi</a>
+                </div>
+
+                <!-- Right Utility Icons & Mobile CTA -->
+                <div class="flex items-center gap-4">
+                    <!-- Shopping Cart Button -->
+                    <button id="cartBtn" class="relative p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-brand-neon hover:text-brand-neon transition group">
+                        <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                        <span id="cartCountBadge" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-brand-neon text-brand-dark text-[11px] font-bold rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <!-- Mobile Toggle Menu -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-20 left-0 w-full bg-brand-dark/95 backdrop-blur-lg border-b border-zinc-800 py-6 px-4 flex flex-col gap-4">
+            <a href="#hero" class="mobile-nav-link text-zinc-300 hover:text-brand-neon font-medium transition py-2 border-b border-zinc-900">Home</a>
+            <a href="#catalog" class="mobile-nav-link text-zinc-300 hover:text-brand-neon font-medium transition py-2 border-b border-zinc-900">Layanan & Harga</a>
+            <a href="#statistics" class="mobile-nav-link text-zinc-300 hover:text-brand-neon font-medium transition py-2 border-b border-zinc-900">Grafik Kinerja</a>
+            <a href="#testimonials" class="mobile-nav-link text-zinc-300 hover:text-brand-neon font-medium transition py-2 border-b border-zinc-900">Ulasan</a>
+            <a href="#location" class="mobile-nav-link text-zinc-300 hover:text-brand-neon font-medium transition py-2">Kontak & Lokasi</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+        <!-- Parallax Background Overlay -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-out" style="background-image: url('https://images.unsplash.com/photo-1513151233558-d860c5398176');" id="heroBg">
+            <!-- Moody dark filter over layout -->
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/95 via-brand-dark/85 to-brand-dark"></div>
+        </div>
+
+        <!-- Glowing Ambient Lights -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-brand-green/10 blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-brand-neon/5 blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-brand-neon text-xs font-semibold tracking-wide uppercase">
+                        <span class="w-2 h-2 rounded-full bg-brand-neon animate-ping"></span>
+                        Premium Digital Agency Tasikmalaya
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-white leading-tight">
+                        Ubah Momen Spesial Menjadi <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-neon">Undangan Digital & Website</span> Terbaik
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0">
+                        AQUEST TECH menghadirkan pembuatan undangan pernikahan, khitanan, event, serta pembuatan website bisnis dengan visual elegan, responsif, dan performa tinggi.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#catalog" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-green to-brand-neon text-zinc-950 font-bold hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] transition duration-300 text-center flex items-center justify-center gap-2">
+                            Mulai Pesan <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#location" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-white font-semibold transition text-center flex items-center justify-center gap-2">
+                            Hubungi Kantor <i data-lucide="map-pin" class="w-5 h-5 text-brand-neon"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Showcase Frame / Decorative Area -->
+                <div class="lg:col-span-5 relative flex justify-center lg:justify-end">
+                    <div class="relative w-full max-w-sm aspect-[4/5] bg-brand-card rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl shadow-emerald-500/5 group">
+                        <!-- Simulated Mockup Browser Header -->
+                        <div class="flex items-center gap-1.5 px-4 py-3 bg-zinc-950/80 border-b border-zinc-800">
+                            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+                            <span class="text-[10px] text-zinc-500 ml-4">aquest-tech.com/undangan-pernikahan</span>
+                        </div>
+                        
+                        <!-- Visual Image Container -->
+                        <div class="relative w-full h-[calc(100%-40px)] bg-cover bg-center overflow-hidden transition duration-500 group-hover:scale-105" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80');">
+                            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/20 flex flex-col justify-end p-6">
+                                <span class="text-xs text-brand-neon font-semibold uppercase tracking-wider">Premium Template</span>
+                                <h3 class="text-xl font-bold text-white mt-1">Undangan Pernikahan Romantis</h3>
+                                <p class="text-xs text-zinc-400 mt-2">Desain premium yang memukau bagi hari istimewa Anda dengan fitur RSVP interaktif & Maps.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATISTICS / PERFORMANCE SECTION -->
+    <section id="statistics" class="py-24 bg-brand-dark/50 relative overflow-hidden border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                <span class="text-brand-neon text-sm font-semibold tracking-wider uppercase">Analisis Performa</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-2">Pertumbuhan & Kepercayaan Pelanggan</h2>
+                <p class="text-zinc-400 mt-4 text-base">
+                    Grafik statistik peningkatan kualitas serta akumulasi proyek pembuatan undangan digital dan website bisnis yang kami kelola secara profesional.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Data Counter Panel -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                    <div class="p-6 bg-brand-card/70 border border-zinc-800 rounded-2xl relative group hover:border-emerald-500/30 transition reveal-element">
+                        <div class="absolute top-4 right-4 text-brand-neon/20">
+                            <i data-lucide="users" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-zinc-400 text-sm font-medium">Pengguna Aktif</h4>
+                        <p class="text-4xl font-extrabold font-heading text-white mt-2">1,500+</p>
+                        <span class="text-xs text-brand-neon mt-1 block font-medium">+35% Bulan Ini</span>
+                    </div>
+
+                    <div class="p-6 bg-brand-card/70 border border-zinc-800 rounded-2xl relative group hover:border-emerald-500/30 transition reveal-element">
+                        <div class="absolute top-4 right-4 text-brand-neon/20">
+                            <i data-lucide="check-circle" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-zinc-400 text-sm font-medium">Proyek Selesai</h4>
+                        <p class="text-4xl font-extrabold font-heading text-white mt-2">2,800+</p>
+                        <span class="text-xs text-brand-neon mt-1 block font-medium">Selesai Tepat Waktu</span>
+                    </div>
+
+                    <div class="p-6 bg-brand-card/70 border border-zinc-800 rounded-2xl relative group hover:border-emerald-500/30 transition reveal-element">
+                        <div class="absolute top-4 right-4 text-brand-neon/20">
+                            <i data-lucide="star" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-zinc-400 text-sm font-medium">Tingkat Kepuasan</h4>
+                        <p class="text-4xl font-extrabold font-heading text-white mt-2">99.8%</p>
+                        <span class="text-xs text-zinc-500 mt-1 block">Berdasarkan Google Feedback</span>
+                    </div>
+
+                    <div class="p-6 bg-brand-card/70 border border-zinc-800 rounded-2xl relative group hover:border-emerald-500/30 transition reveal-element">
+                        <div class="absolute top-4 right-4 text-brand-neon/20">
+                            <i data-lucide="award" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-zinc-400 text-sm font-medium">Layanan Unggul</h4>
+                        <p class="text-4xl font-extrabold font-heading text-white mt-2">No. 1</p>
+                        <span class="text-xs text-brand-neon mt-1 block font-medium">Tasikmalaya Digital</span>
+                    </div>
+                </div>
+
+                <!-- Live Interactive Growth Graph -->
+                <div class="lg:col-span-7 bg-brand-card/50 border border-zinc-800 rounded-2xl p-6 sm:p-8 reveal-element">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Grafik Perkembangan Perusahaan</h3>
+                            <p class="text-xs text-brand-muted">Pertumbuhan pembuatan proyek (2023 - 2026)</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded bg-brand-green/10 border border-brand-green/20 text-brand-neon text-[11px] font-bold uppercase tracking-wider">
+                            Live Update
+                        </span>
+                    </div>
+                    <div class="w-full relative min-h-[300px] flex items-center justify-center">
+                        <canvas id="growthChart" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+            </div>
 
         </div>
-    </main>
+    </section>
 
-    <!-- Custom Toast Notification Box -->
-    <div id="toastNotification" class="fixed bottom-6 right-6 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none z-50 flex items-center gap-3 bg-slate-900 border border-emerald-500/40 text-emerald-300 px-4 py-3 rounded-xl shadow-2xl shadow-emerald-950/20">
-        <div class="bg-emerald-500/10 text-emerald-400 p-1.5 rounded-lg">
-            <i class="fa-solid fa-circle-check"></i>
-        </div>
-        <div>
-            <p class="text-xs font-bold text-slate-100">Berhasil Disalin!</p>
-            <p class="text-[10px] text-slate-400">Prompt siap di-paste.</p>
-        </div>
-    </div>
+    <!-- PRODUCT CATALOG & PRICING -->
+    <section id="catalog" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                <span class="text-brand-neon text-sm font-semibold tracking-wider uppercase">Paket Layanan Terbaik</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-2">Daftar Menu & Katalog Harga</h2>
+                <p class="text-zinc-400 mt-4 text-base">
+                    Pilih jenis layanan digital terbaik sesuai kebutuhan momen bahagia Anda, mulai dari undangan digital hingga pembuatan situs bisnis komprehensif.
+                </p>
+            </div>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-slate-800 bg-[#0b0f19] py-6 mt-12">
-        <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:items-center">
-            <p class="text-xs text-slate-500">© 2026 PromptCraft Web Builder. Built for AQUEST TECH.</p>
-            <div class="flex gap-4 justify-center mt-3 sm:mt-0 text-slate-500 text-sm">
-                <a href="#" class="hover:text-indigo-400 transition-all-300"><i class="fa-brands fa-github"></i></a>
-                <a href="#" class="hover:text-indigo-400 transition-all-300"><i class="fa-brands fa-discord"></i></a>
-                <a href="#" class="hover:text-indigo-400 transition-all-300"><i class="fa-solid fa-globe"></i></a>
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item 1: Undangan Pernikahan -->
+                <div class="bg-brand-card border border-zinc-800 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:border-brand-neon/40 hover:-translate-y-1 flex flex-col h-full group reveal-element">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Undangan Pernikahan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/18181b/10b981?text=Undangan+Pernikahan'">
+                        <span class="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md text-brand-neon text-xs font-semibold">Terpopuler</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold text-white mb-2">Undangan Pernikahan</h3>
+                        <p class="text-xs text-zinc-400 line-clamp-2 mb-4">Fitur RSVP otomatis, integrasi peta lokasi, galeri foto, musik latar, serta manajemen tamu tak terbatas.</p>
+                        <div class="mt-auto pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-zinc-500 uppercase block">Mulai dari</span>
+                                <span class="text-lg font-extrabold text-brand-neon">Rp 75.000</span>
+                            </div>
+                            <button onclick="addToCart('Undangan Pernikahan', 75000, 'undangan-pernikahan')" class="p-2.5 rounded-xl bg-brand-green/10 border border-brand-green/20 text-brand-neon hover:bg-brand-neon hover:text-brand-dark transition duration-300">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Undangan Khitanan -->
+                <div class="bg-brand-card border border-zinc-800 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:border-brand-neon/40 hover:-translate-y-1 flex flex-col h-full group reveal-element">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="src/undangan kh.png" alt="Undangan Khitanan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/18181b/10b981?text=Undangan+Khitanan'">
+                        <span class="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md text-zinc-400 text-xs font-semibold">Special Edition</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold text-white mb-2">Undangan Khitanan</h3>
+                        <p class="text-xs text-zinc-400 line-clamp-2 mb-4">Desain ceria khusus khitanan anak, menyisipkan foto ganteng, Google Maps, RSVP serta kolom doa restu.</p>
+                        <div class="mt-auto pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-zinc-500 uppercase block">Mulai dari</span>
+                                <span class="text-lg font-extrabold text-brand-neon">Rp 65.000</span>
+                            </div>
+                            <button onclick="addToCart('Undangan Khitanan', 65000, 'undangan-khitanan')" class="p-2.5 rounded-xl bg-brand-green/10 border border-brand-green/20 text-brand-neon hover:bg-brand-neon hover:text-brand-dark transition duration-300">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Undangan Event Lain -->
+                <div class="bg-brand-card border border-zinc-800 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:border-brand-neon/40 hover:-translate-y-1 flex flex-col h-full group reveal-element">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80" alt="Undangan Event Lain" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/18181b/10b981?text=Undangan+Event'">
+                        <span class="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md text-zinc-400 text-xs font-semibold">Multifungsi</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold text-white mb-2">Undangan Event Lain</h3>
+                        <p class="text-xs text-zinc-400 line-clamp-2 mb-4">Undangan digital kustom untuk ulang tahun, reuni akbar, grand opening bisnis, arisan keluarga, dan event khusus.</p>
+                        <div class="mt-auto pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-zinc-500 uppercase block">Mulai dari</span>
+                                <span class="text-lg font-extrabold text-brand-neon">Rp 150.000</span>
+                            </div>
+                            <button onclick="addToCart('Undangan Event Lain', 150000, 'undangan-event-lain')" class="p-2.5 rounded-xl bg-brand-green/10 border border-brand-green/20 text-brand-neon hover:bg-brand-neon hover:text-brand-dark transition duration-300">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4: Website Business -->
+                <div class="bg-brand-card border border-zinc-800 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:border-brand-neon/40 hover:-translate-y-1 flex flex-col h-full group reveal-element">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Website Business" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/18181b/10b981?text=Website+Business'">
+                        <span class="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-brand-green/20 text-brand-neon text-xs font-semibold">PRO Service</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold text-white mb-2">Website Business</h3>
+                        <p class="text-xs text-zinc-400 line-clamp-2 mb-4">Website Landing Page, e-commerce, atau company profile eksklusif lengkap dengan hosting & domain premium.</p>
+                        <div class="mt-auto pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-zinc-500 uppercase block">Mulai dari</span>
+                                <span class="text-lg font-extrabold text-brand-neon">Rp 1.500.000</span>
+                            </div>
+                            <button onclick="addToCart('Website Business', 1500000, 'website-business')" class="p-2.5 rounded-xl bg-brand-green/10 border border-brand-green/20 text-brand-neon hover:bg-brand-neon hover:text-brand-dark transition duration-300">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="py-24 bg-brand-dark/50 border-t border-zinc-900 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                <span class="text-brand-neon text-sm font-semibold tracking-wider uppercase">Suara Pelanggan</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-2">Ulasan Jujur Pelanggan</h2>
+                <p class="text-zinc-400 mt-4 text-base">
+                    Kepuasan klien kami adalah prioritas tertinggi. Berikut ulasan tulus dari mereka yang telah mempercayakan proyek bahagianya bersama AQUEST TECH.
+                </p>
+            </div>
+
+            <!-- Testimonial Slider Structure -->
+            <div class="max-w-4xl mx-auto relative reveal-element">
+                <!-- Cards Wrapper -->
+                <div class="relative min-h-[220px] overflow-hidden">
+                    <!-- Carousel Slide 1 -->
+                    <div class="testimonial-slide absolute inset-0 w-full opacity-0 transition-all duration-750 ease-in-out transform scale-95 pointer-events-none flex flex-col items-center justify-center text-center">
+                        <div class="p-3 bg-brand-green/10 text-brand-neon rounded-full mb-6">
+                            <i data-lucide="quote" class="w-10 h-10"></i>
+                        </div>
+                        <p class="text-lg sm:text-xl md:text-2xl text-zinc-100 italic leading-relaxed max-w-2xl px-4">
+                            "Terimakasih AQUEST berkat tim nya yang sangat cepat respon undangan pernikahan kami bisa cepat selesai."
+                        </p>
+                        <h4 class="text-brand-neon font-bold text-base mt-6">Alif & Windi</h4>
+                        <p class="text-zinc-500 text-xs mt-1">Pengantin Baru - Tasikmalaya</p>
+                    </div>
+
+                    <!-- Carousel Slide 2 -->
+                    <div class="testimonial-slide absolute inset-0 w-full opacity-0 transition-all duration-750 ease-in-out transform scale-95 pointer-events-none flex flex-col items-center justify-center text-center">
+                        <div class="p-3 bg-brand-green/10 text-brand-neon rounded-full mb-6">
+                            <i data-lucide="quote" class="w-10 h-10"></i>
+                        </div>
+                        <p class="text-lg sm:text-xl md:text-2xl text-zinc-100 italic leading-relaxed max-w-2xl px-4">
+                            "Website landing page bisnis kami dirancang sangat modern oleh AQUEST TECH. Layanan responsif dan traffic penjualan kami naik 200%!"
+                        </p>
+                        <h4 class="text-brand-neon font-bold text-base mt-6">Rangga Aditia</h4>
+                        <p class="text-zinc-500 text-xs mt-1">Founder PT Sinergi Muda</p>
+                    </div>
+
+                    <!-- Carousel Slide 3 -->
+                    <div class="testimonial-slide absolute inset-0 w-full opacity-0 transition-all duration-750 ease-in-out transform scale-95 pointer-events-none flex flex-col items-center justify-center text-center">
+                        <div class="p-3 bg-brand-green/10 text-brand-neon rounded-full mb-6">
+                            <i data-lucide="quote" class="w-10 h-10"></i>
+                        </div>
+                        <p class="text-lg sm:text-xl md:text-2xl text-zinc-100 italic leading-relaxed max-w-2xl px-4">
+                            "Desain undangan digitalnya beneran premium, bisa pasang foto galeri yang smooth banget pas loading. Banyak sanak saudara yang memuji!"
+                        </p>
+                        <h4 class="text-brand-neon font-bold text-base mt-6">Siti Nurhaliza</h4>
+                        <p class="text-zinc-500 text-xs mt-1">Klien Undangan Pernikahan</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex items-center justify-center gap-6 mt-10">
+                    <button onclick="prevSlide()" class="p-3 rounded-full bg-zinc-900 border border-zinc-800 hover:border-brand-neon hover:text-brand-neon transition">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <!-- Indicators -->
+                    <div id="slideIndicators" class="flex gap-2"></div>
+                    <button onclick="nextSlide()" class="p-3 rounded-full bg-zinc-900 border border-zinc-800 hover:border-brand-neon hover:text-brand-neon transition">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- USER REVIEW FORM SECTION -->
+    <section id="review-form" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Left Details Info -->
+                <div class="lg:col-span-5 space-y-6 reveal-element">
+                    <span class="text-brand-neon text-sm font-semibold tracking-wider uppercase">Interaksi Tamu</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white">Suarakan Feedback Anda</h2>
+                    <p class="text-zinc-400">
+                        Kehadiran Anda sangat berharga bagi kami. Tuliskan ulasan, kritik, saran, ataupun ulasan performa sistem kami secara langsung di papan tulis virtual di samping. Masukan Anda membantu kami terus berkembang.
+                    </p>
+                    <div class="p-6 bg-brand-card/50 border border-zinc-800 rounded-2xl flex items-start gap-4">
+                        <div class="p-2.5 rounded-xl bg-brand-green/15 text-brand-neon">
+                            <i data-lucide="message-square" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Ulasan Real-Time</h4>
+                            <p class="text-xs text-zinc-500 mt-1">Ulasan yang dikirim akan langsung tersaji dan ditampilkan ke publik di bawah formulir.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Form Card -->
+                <div class="lg:col-span-7 bg-brand-card border border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-2xl reveal-element">
+                    <form id="submissionForm" onsubmit="handleReviewSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2" for="reviewName">Nama Anda</label>
+                                <input type="text" id="reviewName" required class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-brand-neon transition" placeholder="Contoh: Alif Firmansyah">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2" for="reviewRating">Rating Layanan</label>
+                                <select id="reviewRating" class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-neon transition">
+                                    <option value="5">⭐⭐⭐⭐⭐ (Sempurna)</option>
+                                    <option value="4">⭐⭐⭐⭐ (Sangat Baik)</option>
+                                    <option value="3">⭐⭐⭐ (Cukup Baik)</option>
+                                    <option value="2">⭐⭐ (Perlu Peningkatan)</option>
+                                    <option value="1">⭐ (Buruk)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2" for="reviewText">Kritik, Saran & Ulasan</label>
+                            <textarea id="reviewText" rows="4" required class="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-brand-neon transition" placeholder="Tuliskan pengalaman Anda bersama layanan AQUEST TECH..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-neon text-brand-dark font-bold hover:bg-emerald-300 shadow-lg shadow-brand-neon/10 transition duration-300 flex items-center justify-center gap-2">
+                            Kirim Ulasan Virtual <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+
+                    <!-- Embedded Recent Live Feedbacks -->
+                    <div class="mt-8 pt-8 border-t border-zinc-800">
+                        <h4 class="text-sm font-bold text-white mb-4">Ulasan Tamu Terbaru</h4>
+                        <div id="liveReviewsContainer" class="space-y-4 max-h-[300px] overflow-y-auto pr-2">
+                            <!-- Dynamic user reviews inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GOOGLE MAPS & PHYSICAL OFFICE LOCATION -->
+    <section id="location" class="py-24 bg-brand-dark/50 border-t border-zinc-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Physical Address details -->
+                <div class="lg:col-span-5 space-y-6 reveal-element">
+                    <span class="text-brand-neon text-sm font-semibold tracking-wider uppercase">Kantor Fisik Kami</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white">Hubungi & Kunjungi Kami</h2>
+                    <p class="text-zinc-400">
+                        AQUEST TECH memiliki lokasi operasional fisik resmi yang dapat dikunjungi pelanggan untuk berkonsultasi mengenai pembuatan undangan eksklusif dan desain website premium secara langsung.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-brand-neon">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Alamat Lengkap</h4>
+                                <p class="text-zinc-400 text-sm mt-1">Kp Saripin Kel Sukanagara Kec Purbaratu Kota Tasikmalaya No 105</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-brand-neon">
+                                <i data-lucide="clock" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Jam Operasional Kantor</h4>
+                                <p class="text-zinc-400 text-sm mt-1">Senin - Minggu: 07.00 - 23.00 WIB</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-brand-neon">
+                                <i data-lucide="mail" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Kontak Email Resmi</h4>
+                                <p class="text-zinc-400 text-sm mt-1">aquestmodifikasi@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed Frame representation -->
+                <div class="lg:col-span-7 reveal-element">
+                    <div class="relative w-full aspect-video sm:aspect-[16/10] bg-brand-card border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
+                        <!-- Custom styled interactive map using Google Maps Iframe styled darker -->
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Kp%20Saripin%20Kel%20Sukanagara%20Kec%20Purbaratu%20Kota%20Tasikmalaya%20No%20105&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            class="w-full h-full grayscale invert opacity-85 contrast-125 focus:outline-none border-none"
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <div class="absolute bottom-4 left-4 bg-zinc-950/90 border border-zinc-800 backdrop-blur px-4 py-2.5 rounded-xl flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand-neon animate-pulse"></span>
+                            <span class="text-xs font-semibold text-white">Kantor AQUEST TECH</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-brand-dark border-t border-zinc-900 pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-green to-brand-neon flex items-center justify-center">
+                            <i data-lucide="terminal" class="w-5 h-5 text-brand-dark"></i>
+                        </div>
+                        <span class="text-lg font-bold text-white">AQUEST TECH</span>
+                    </div>
+                    <p class="text-xs text-zinc-500">
+                        Aquest adalah jasa yang bergerak di bidang layanan digital dan dirancang untuk mempermudah dalam pekerjaan. 
+                    </p>
+                </div>
+                <!-- Col 2: Services -->
+                <div class="space-y-4">
+                    <h4 class="text-white font-bold text-sm">Layanan Utama</h4>
+                    <ul class="space-y-2 text-xs text-zinc-500">
+                        <li><a href="#catalog" class="hover:text-brand-neon transition">Undangan Pernikahan</a></li>
+                        <li><a href="#catalog" class="hover:text-brand-neon transition">Undangan Khitanan</a></li>
+                        <li><a href="#catalog" class="hover:text-brand-neon transition">Undangan Event Custom</a></li>
+                        <li><a href="#catalog" class="hover:text-brand-neon transition">Pembuatan Website Bisnis</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3: Navigation -->
+                <div class="space-y-4">
+                    <h4 class="text-white font-bold text-sm">Akses Cepat</h4>
+                    <ul class="space-y-2 text-xs text-zinc-500">
+                        <li><a href="#hero" class="hover:text-brand-neon transition">Home</a></li>
+                        <li><a href="#statistics" class="hover:text-brand-neon transition">Kinerja</a></li>
+                        <li><a href="#testimonials" class="hover:text-brand-neon transition">Testimonial</a></li>
+                        <li><a href="#location" class="hover:text-brand-neon transition">Lokasi</a></li>
+                    </ul>
+                </div>
+                <!-- Col 4: Operational Location info -->
+                <div class="space-y-4">
+                    <h4 class="text-white font-bold text-sm">Lokasi & Kontak</h4>
+                    <p class="text-xs text-zinc-500 leading-relaxed">
+                        Kp Saripin Kel Sukanagara Kec Purbaratu Kota Tasikmalaya No 105
+                    </p>
+                    <p class="text-xs text-brand-neon">
+                        Hubungi Admin: +62 81779993104
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-zinc-900/80 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-zinc-600">&copy; 2018 AQUEST TECH. All rights reserved.</p>
+                <div class="flex items-center gap-4 text-xs text-zinc-600">
+                    <a href="#" class="hover:text-zinc-400">Terms of Service</a>
+                    <span>&bull;</span>
+                    <a href="#" class="hover:text-zinc-400">Privacy Policy</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT SYSTEM LOGIC -->
-    <script>
-        // DOM Elements
-        const form = document.getElementById('generatorForm');
-        const namaPerusahaan = document.getElementById('namaPerusahaan');
-        const testimonial = document.getElementById('testimonial');
-        const menuDiJual = document.getElementById('menuDiJual');
-        const lokasi = document.getElementById('lokasi');
-        const temaWarna = document.getElementById('temaWarna');
-        const gayaVisual = document.getElementById('gayaVisual');
+    <!-- CHAT FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/6281779993104?text=Halo%20Aquest%20Tech,%20saya%20tertarik%20konsultasi%20mengenai%20layanan%20Anda." target="_blank" class="fixed bottom-6 right-6 z-40 p-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 shadow-2xl shadow-emerald-500/20 hover:scale-110 active:scale-95 transition-all duration-300 animate-float flex items-center justify-center">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+        <!-- Ripple effect ring -->
+        <span class="absolute -inset-1 rounded-full border border-emerald-500/50 animate-ping opacity-75"></span>
+    </a>
 
-        // Checkboxes & Dynamic Sub-Inputs elements
-        const elNama = document.getElementById('elNama');
-        const elHero = document.getElementById('elHero');
-        const valHeroLink = document.getElementById('valHeroLink');
-        const containerHeroLink = document.getElementById('containerHeroLink');
+    <!-- SHOPPING CART SLIDE-OUT DRAWER -->
+    <div id="cartDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-zinc-950 border-l border-zinc-800 shadow-2xl translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
+        <!-- Header -->
+        <div class="p-6 border-b border-zinc-800 flex items-center justify-between bg-brand-card">
+            <div class="flex items-center gap-2">
+                <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-neon"></i>
+                <h3 class="text-lg font-bold text-white">Keranjang Belanja</h3>
+            </div>
+            <button id="closeCartBtn" class="p-2 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition text-zinc-400 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
 
-        const elMenuHarga = document.getElementById('elMenuHarga');
-        const btnAddDetailedMenu = document.getElementById('btnAddDetailedMenu');
-        const containerMenuHarga = document.getElementById('containerMenuHarga');
-        const detailedMenusList = document.getElementById('detailedMenusList');
+        <!-- Scrollable Cart Content List -->
+        <div id="cartItemsList" class="flex-grow overflow-y-auto p-6 space-y-4">
+            <!-- Dynamic elements will be rendered by JS -->
+            <div id="emptyCartMessage" class="h-full flex flex-col items-center justify-center text-center text-zinc-500 space-y-3">
+                <i data-lucide="shopping-cart" class="w-12 h-12 stroke-1"></i>
+                <p class="text-sm font-medium">Keranjang belanja Anda masih kosong</p>
+                <button onclick="document.getElementById('closeCartBtn').click();" class="text-xs text-brand-neon hover:underline font-semibold">Lihat Katalog</button>
+            </div>
+        </div>
 
-        const elTesti = document.getElementById('elTesti');
-        const elLiveChat = document.getElementById('elLiveChat');
-        const elMaps = document.getElementById('elMaps');
-        const elUcapan = document.getElementById('elUcapan');
-        const elKeranjang = document.getElementById('elKeranjang');
-        const elGrafik = document.getElementById('elGrafik');
+        <!-- Checkout & Form Container -->
+        <div id="cartCheckoutArea" class="p-6 border-t border-zinc-800 bg-brand-card hidden">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-zinc-400 font-medium text-sm">Total Belanja:</span>
+                <span id="cartTotalPrice" class="text-xl font-extrabold text-brand-neon">Rp 0</span>
+            </div>
 
-        const productImagesContainer = document.getElementById('productImagesContainer');
-        const btnAddProductImg = document.getElementById('btnAddProductImg');
+            <!-- Client Info Details for checkout -->
+            <form id="checkoutForm" onsubmit="handleCartCheckout(event)" class="space-y-4 mt-2">
+                <div>
+                    <label class="block text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1" for="checkoutName">Nama Lengkap Pemesan</label>
+                    <input type="text" id="checkoutName" required class="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3.5 py-2 text-xs text-white focus:outline-none focus:border-brand-neon" placeholder="Nama Anda">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1" for="checkoutDate">Tanggal Momen Event</label>
+                    <input type="date" id="checkoutDate" required class="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3.5 py-2 text-xs text-white focus:outline-none focus:border-brand-neon">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1" for="checkoutNotes">Catatan Tambahan</label>
+                    <textarea id="checkoutNotes" rows="2" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3.5 py-2 text-xs text-white focus:outline-none focus:border-brand-neon" placeholder="Kebutuhan khusus atau tema desain..."></textarea>
+                </div>
 
-        const promptRawOutput = document.getElementById('promptRawOutput');
-        const btnSalin = document.getElementById('btnSalin');
-        const toast = document.getElementById('toastNotification');
-
-        // State Trackers
-        let productImgCount = 0;
-        let detailedMenuCount = 0;
-
-        // Helper function: Add product image link field (Max 6)
-        function addProductImageField(defaultValue = "") {
-            if (productImgCount >= 6) return;
-            productImgCount++;
-            
-            const div = document.createElement('div');
-            div.className = 'flex items-center gap-2 transition-all-300 bg-[#1e293b]/60 p-2 rounded-xl border border-slate-800/80';
-            div.id = `product-img-group-${productImgCount}`;
-            div.innerHTML = `
-                <span class="text-xs font-semibold text-slate-500 w-6 text-center">#${productImgCount}</span>
-                <input type="url" placeholder="https://images.unsplash.com/photo-example-produk-${productImgCount}" 
-                    class="product-img-url flex-grow bg-[#0f172a] border border-slate-700/60 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
-                    value="${defaultValue}">
-                <button type="button" onclick="removeProductImageField('${div.id}')" class="text-xs text-rose-400 hover:text-rose-300 p-1.5 hover:bg-rose-500/10 rounded-lg cursor-pointer">
-                    <i class="fa-solid fa-trash-can"></i>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-green to-brand-neon text-brand-dark font-bold hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] transition duration-300 flex items-center justify-center gap-2">
+                    Lanjutkan ke WhatsApp Admin <i data-lucide="external-link" class="w-4 h-4"></i>
                 </button>
-            `;
-            productImagesContainer.appendChild(div);
-            attachInputListeners(div.querySelector('.product-img-url'));
-            updatePrompt();
-        }
+            </form>
+        </div>
+    </div>
+    
+    <!-- Backdrop overlay shadow -->
+    <div id="backdropOverlay" class="fixed inset-0 bg-brand-dark/60 backdrop-blur-sm z-40 hidden transition-opacity duration-300 opacity-0"></div>
 
-        function removeProductImageField(elementId) {
-            const el = document.getElementById(elementId);
-            if (el) {
-                el.remove();
-                productImgCount--;
-                reIndexProductImages();
-                updatePrompt();
-            }
-        }
+    <!-- NOTIFICATION POPUP PANEL -->
+    <div id="toastNotification" class="fixed bottom-6 left-6 z-50 px-5 py-4 bg-brand-card border border-zinc-800 rounded-2xl flex items-center gap-3 shadow-2xl translate-y-24 opacity-0 transition-all duration-300 max-w-sm pointer-events-none">
+        <div class="p-2 rounded-lg bg-brand-green/15 text-brand-neon" id="toastIcon">
+            <i data-lucide="check" class="w-5 h-5"></i>
+        </div>
+        <div>
+            <h5 class="text-white font-bold text-xs" id="toastTitle">Berhasil</h5>
+            <p class="text-zinc-400 text-[11px] mt-0.5" id="toastMessage">Satu item dimasukkan ke dalam keranjang.</p>
+        </div>
+    </div>
 
-        function reIndexProductImages() {
-            const containers = productImagesContainer.children;
-            productImgCount = 0;
-            Array.from(containers).forEach((el, index) => {
-                productImgCount++;
-                el.id = `product-img-group-${productImgCount}`;
-                el.querySelector('span').innerText = `#${productImgCount}`;
-                const input = el.querySelector('input');
-                input.placeholder = `https://images.unsplash.com/photo-example-produk-${productImgCount}`;
-            });
-        }
+    <script>
+        // Init Lucide Icons dynamically
+        lucide.createIcons();
 
-        // Helper function: Add detailed menu item with price and image (Max 6)
-        function addDetailedMenuField(name = "", price = "", imgUrl = "") {
-            if (detailedMenuCount >= 6) return;
-            detailedMenuCount++;
-
-            const div = document.createElement('div');
-            div.className = 'bg-[#0f172a] border border-slate-800 rounded-xl p-4 relative space-y-3 transition-all-300';
-            div.id = `detailed-menu-group-${detailedMenuCount}`;
-            div.innerHTML = `
-                <div class="flex justify-between items-center pb-2 border-b border-slate-800/60">
-                    <span class="text-xs font-bold text-indigo-400">Item Menu #${detailedMenuCount}</span>
-                    <button type="button" onclick="removeDetailedMenuField('${div.id}')" class="text-xs text-rose-400 hover:text-rose-300 px-2 py-1 hover:bg-rose-500/10 rounded-lg cursor-pointer">
-                        <i class="fa-solid fa-trash mr-1"></i> Hapus
-                    </button>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div class="flex flex-col gap-1">
-                        <label class="text-[10px] text-slate-400 font-semibold uppercase">Nama Item</label>
-                        <input type="text" placeholder="Contoh: Premium Bouquet" class="menu-item-name w-full bg-[#1e293b] border border-slate-700/60 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500" value="${name}">
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label class="text-[10px] text-slate-400 font-semibold uppercase">Banderol Harga</label>
-                        <input type="text" placeholder="Contoh: Rp 250.000" class="menu-item-price w-full bg-[#1e293b] border border-slate-700/60 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500" value="${price}">
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label class="text-[10px] text-slate-400 font-semibold uppercase">URL Gambar Menu</label>
-                        <input type="url" placeholder="https://images.unsplash.com/..." class="menu-item-img w-full bg-[#1e293b] border border-slate-700/60 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500" value="${imgUrl}">
-                    </div>
-                </div>
-            `;
-            detailedMenusList.appendChild(div);
-            div.querySelectorAll('input').forEach(attachInputListeners);
-            updatePrompt();
-        }
-
-        function removeDetailedMenuField(elementId) {
-            const el = document.getElementById(elementId);
-            if (el) {
-                el.remove();
-                detailedMenuCount--;
-                reIndexDetailedMenus();
-                updatePrompt();
-            }
-        }
-
-        function reIndexDetailedMenus() {
-            const containers = detailedMenusList.children;
-            detailedMenuCount = 0;
-            Array.from(containers).forEach((el, index) => {
-                detailedMenuCount++;
-                el.id = `detailed-menu-group-${detailedMenuCount}`;
-                el.querySelector('.text-indigo-400').innerText = `Item Menu #${detailedMenuCount}`;
-            });
-        }
-
-        // Dynamic Display logic for Hero image link input
-        elHero.addEventListener('change', () => {
-            if (elHero.checked) {
-                containerHeroLink.classList.add('show');
-            } else {
-                containerHeroLink.classList.remove('show');
-            }
-            updatePrompt();
-        });
-
-        // Dynamic Display logic for Menu and Price elements input
-        elMenuHarga.addEventListener('change', () => {
-            if (elMenuHarga.checked) {
-                containerMenuHarga.classList.add('show');
-                btnAddDetailedMenu.classList.remove('hidden');
-                // Auto create first detailed menu if empty
-                if (detailedMenuCount === 0) {
-                    addDetailedMenuField();
+        // Reveal element animation logic on scroll
+        const revealElements = document.querySelectorAll('.reveal-element');
+        const revealOnScroll = () => {
+            const triggerBottom = window.innerHeight * 0.85;
+            revealElements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                if (elTop < triggerBottom) {
+                    el.classList.add('active');
                 }
-            } else {
-                containerMenuHarga.classList.remove('show');
-                btnAddDetailedMenu.classList.add('hidden');
-            }
-            updatePrompt();
-        });
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
 
-        // Add Product Image Button trigger
-        btnAddProductImg.addEventListener('click', () => {
-            if (productImgCount < 6) {
-                addProductImageField();
-            }
-        });
-
-        // Add Detailed Menu Button trigger
-        btnAddDetailedMenu.addEventListener('click', () => {
-            if (detailedMenuCount < 6) {
-                addDetailedMenuField();
+        // Parallax Light effect for Hero section
+        const heroBg = document.getElementById('heroBg');
+        window.addEventListener('scroll', () => {
+            const scrollOffset = window.pageYOffset;
+            if (heroBg) {
+                heroBg.style.transform = `translateY(${scrollOffset * 0.25}px)`;
             }
         });
 
-        // Function helper to append input dynamic listener
-        function attachInputListeners(element) {
-            element.addEventListener('input', updatePrompt);
-            element.addEventListener('change', updatePrompt);
-        }
+        // Mobile Menu Toggling
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
 
-        // Hook static inputs to update trigger
-        const staticInteractiveFields = [
-            namaPerusahaan, testimonial, menuDiJual, lokasi, temaWarna, gayaVisual,
-            elNama, valHeroLink, elTesti, elLiveChat, elMaps, elUcapan, elKeranjang, elGrafik
+        // Interactive Live Growth Chart (Chart.js implementation)
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        const growthChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Q1 2023', 'Q3 2023', 'Q1 2024', 'Q3 2024', 'Q1 2025', 'Q3 2025', 'Q1 2026'],
+                datasets: [{
+                    label: 'Jumlah Proyek Undangan & Website',
+                    data: [150, 420, 780, 1150, 1680, 2240, 2800],
+                    borderColor: '#10b981', // brand green
+                    borderWidth: 3,
+                    pointBackgroundColor: '#34d399', // neon
+                    pointBorderColor: '#09090b',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    tension: 0.35,
+                    fill: true,
+                    backgroundColor: (context) => {
+                        const chart = context.chart;
+                        const {ctx, chartArea} = chart;
+                        if (!chartArea) return null;
+                        const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                        gradient.addColorStop(0, 'rgba(16, 185, 129, 0.25)');
+                        gradient.addColorStop(1, 'rgba(16, 185, 129, 0)');
+                        return gradient;
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#121214',
+                        titleColor: '#ffffff',
+                        bodyColor: '#e4e4e7',
+                        borderColor: '#27272a',
+                        borderWidth: 1,
+                        padding: 12,
+                        cornerRadius: 12,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return `Proyek: ${context.parsed.y} Selesai`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(39, 39, 42, 0.4)'
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            font: {
+                                size: 11
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(39, 39, 42, 0.4)'
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            font: {
+                                size: 11
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Testimonial Carousel Slide Mechanics
+        let activeSlideIndex = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const indicatorsContainer = document.getElementById('slideIndicators');
+
+        // Render indicators
+        slides.forEach((_, idx) => {
+            const indicator = document.createElement('button');
+            indicator.className = `w-2 h-2 rounded-full transition-all duration-300 ${idx === 0 ? 'bg-brand-neon w-6' : 'bg-zinc-700'}`;
+            indicator.addEventListener('click', () => goToSlide(idx));
+            indicatorsContainer.appendChild(indicator);
+        });
+
+        const updateSlideRender = () => {
+            slides.forEach((slide, idx) => {
+                slide.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
+                slide.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                
+                const indicator = indicatorsContainer.children[idx];
+                if (indicator) {
+                    indicator.className = `w-2 h-2 rounded-full transition-all duration-300 ${idx === activeSlideIndex ? 'bg-brand-neon w-6' : 'bg-zinc-700'}`;
+                }
+            });
+
+            slides[activeSlideIndex].classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+            slides[activeSlideIndex].classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
+        };
+
+        const nextSlide = () => {
+            activeSlideIndex = (activeSlideIndex + 1) % slides.length;
+            updateSlideRender();
+        };
+
+        const prevSlide = () => {
+            activeSlideIndex = (activeSlideIndex - 1 + slides.length) % slides.length;
+            updateSlideRender();
+        };
+
+        const goToSlide = (idx) => {
+            activeSlideIndex = idx;
+            updateSlideRender();
+        };
+
+        // Auto-rotate slides
+        let slideInterval = setInterval(nextSlide, 8000);
+        const resetSlideInterval = () => {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 8000);
+        };
+        updateSlideRender();
+
+        // Live Reviews / Guest Feedback System State
+        let feedbackReviewsList = [
+            { name: "Alif & Windi", text: "Terimakasih AQUEST berkat tim nya yang sangat cepat respon undangan pernikahan kami bisa cepat selesai", rating: 5, date: "Hari Ini" }
         ];
 
-        staticInteractiveFields.forEach(element => {
-            element.addEventListener('input', updatePrompt);
-            element.addEventListener('change', updatePrompt);
-        });
-
-        // Form Engine compiler to build the single robust Prompt
-        function updatePrompt() {
-            // Read basic values & provide visual placeholders if blank
-            const nama = namaPerusahaan.value.trim() || "[Nama Perusahaan Anda]";
-            const testiSatu = testimonial.value.trim() || "[Masukkan testimonial di sini, misal: 'Pelayanan istimewa dan kualitas bintang lima!' - Customer A]";
-            const produkUtama = menuDiJual.value.trim() || "[Menu / Jasa utama yang dijual]";
-            const lokasiFisik = lokasi.value.trim() || "[Lokasi Toko atau Kota Layanan]";
-            const warna = temaWarna.value;
-            const gaya = gayaVisual.value;
-
-            // Gather Dynamic Product Images
-            const productImgInputs = document.querySelectorAll('.product-img-url');
-            let productImages = [];
-            productImgInputs.forEach((input, idx) => {
-                const val = input.value.trim();
-                if (val) {
-                    productImages.push(`- Gambar Produk #${idx+1}: ${val}`);
-                }
-            });
-            const listGambarProdukString = productImages.length > 0 ? productImages.join('\n') : "- Gambar Produk Utama: [Belum ada link gambar dimasukkan]";
-
-            // Optional Inputs Link & Details Check
-            const heroUrl = valHeroLink.value.trim() || "https://images.unsplash.com/photo-1513151233558-d860c5398176";
-
-            // Gather Dynamic Detailed Menus
-            let detailedMenusArray = [];
-            const menuContainers = detailedMenusList.children;
-            Array.from(menuContainers).forEach((el) => {
-                const itemName = el.querySelector('.menu-item-name').value.trim() || "[Nama Item]";
-                const itemPrice = el.querySelector('.menu-item-price').value.trim() || "[Harga Item]";
-                const itemImg = el.querySelector('.menu-item-img').value.trim() || "https://images.unsplash.com/photo-placeholder";
-                
-                detailedMenusArray.push(`     * **Item**: ${itemName} | **Harga**: ${itemPrice} | **Gambar URL**: ${itemImg}`);
-            });
-            const detailedMenusString = detailedMenusArray.length > 0 ? detailedMenusArray.join('\n') : "     * [Silakan isi data item menu & harga di form kiri]";
-
-            // Array containing checked sub elements list
-            let siseksiWebsite = [];
-
-            if (elNama.checked) {
-                siseksiWebsite.push(`   - **Seksi Identitas**: Tampilkan Logo dan Nama Perusahaan "${nama}" yang menonjol di bagian header navigasi.`);
-            }
-            if (elHero.checked) {
-                siseksiWebsite.push(`   - **Hero Section**: Visual banner utama interaktif dengan background atau ilustrasi gambar berkualitas tinggi dari tautan berikut: ${heroUrl}. Dilengkapi headline penawaran memikat dan tombol call-to-action (CTA).`);
-            }
-            if (elMenuHarga.checked) {
-                siseksiWebsite.push(`   - **Daftar Menu & Katalog Harga**: Menampilkan daftar menu dengan visual gambar pendukung serta rincian harga. Berikut adalah detail menu yang harus ditampilkan:\n${detailedMenusString}`);
-            }
-            if (elTesti.checked) {
-                siseksiWebsite.push(`   - **Testimonial Pelanggan**: Seksi modern interaktif carousel ulasan pelanggan. Masukkan testimoni ini sebagai sampel data awal: "${testiSatu}"`);
-            }
-            if (elLiveChat.checked) {
-                siseksiWebsite.push(`   - **Live Chat / WhatsApp Integration**: Tombol mengambang (floating action button) yang estetik untuk mengarahkan pengguna melakukan chat instan/konsultasi.`);
-            }
-            if (elMaps.checked) {
-                siseksiWebsite.push(`   - **Peta Lokasi Google Maps**: Masukkan peta lokasi atau representasi visual peta terintegrasi untuk alamat: "${lokasiFisik}"`);
-            }
-            if (elUcapan.checked) {
-                siseksiWebsite.push(`   - **Formulir Ulasan Dan Saran**: Area interaktif di mana pengunjung/tamu dapat menuliskan ulasan, kritik, saran, ataupun feedback secara virtual langsung di website.`);
-            }
-            if (elKeranjang.checked) {
-                siseksiWebsite.push(`   - **Sistem Keranjang Belanja & Checkout Pembayaran**: Keranjang belanja mini dinamis berbasis client-side untuk mempermudah tamu memilih menu dan mengarahkan ke gerbang pembayaran online sederhana atau checkout ke admin.`);
-            }
-            if (elGrafik.checked) {
-                siseksiWebsite.push(`   - **Analisis Grafik Perkembangan Perusahaan**: Grafik statistik interaktif (bisa menggunakan pustaka visualisasi seperti Chart.js atau visual SVG) yang menampilkan grafik pertumbuhan positif performa perusahaan.`);
-            }
-
-            // Create formatted list string
-            const listSeksiString = siseksiWebsite.length > 0 ? siseksiWebsite.join("\n") : "   - [Pilihlah salah satu elemen konten di sebelah kiri untuk menyusun struktur utama website]";
-
-            // Combine into the requested template format
-            const compiledPrompt = `Saya ingin kamu bertindak sebagai seorang frontend developer profesional yang membuat website. Website ini harus memiliki desain yang modern, elegan, dan responsif (mobile-first). Gunakan efek animasi halus saat scroll, parallax ringan, serta transisi yang lembut. Website mencakup beberapa bagian utama seperti:
-
---- IDENTITAS UTAMA WEBSITE ---
-• Nama Perusahaan: ${nama}
-• Jasa/Menu Utama: ${produkUtama}
-• Lokasi Kantor/Toko: ${lokasiFisik}
-
---- DETAIL GAMBAR PRODUK UTAMA ---
-${listGambarProdukString}
-
---- ATRIBUT DESIGN & GAYA VISUAL ---
-• Tema Warna Utama: ${warna}
-• Gaya Visual Pilihan: ${gaya}
-
---- DETAIL SEKSI KONTEN WEBSITE YANG HARUS DIBUAT ---
-${listSeksiString}
-
-Mohon buat kode implementasi website ini secara komprehensif, pastikan website tampak cantik di perangkat seluler ataupun desktop, memiliki tata letak premium berkelas, serta selaraskan tema warna "${warna}" dan gaya visual "${gaya}" ke dalam skema palet desain Anda!`;
-
-            promptRawOutput.value = compiledPrompt;
-        }
-
-        // Advanced Copy to clipboard logic using robust fallbacks for iFrame systems
-        btnSalin.addEventListener('click', () => {
-            const textToCopy = promptRawOutput.value;
+        const renderLiveReviews = () => {
+            const container = document.getElementById('liveReviewsContainer');
+            container.innerHTML = '';
             
-            // Temporary Textarea approach (highly compatible within nested environments / iFrames)
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = textToCopy;
-            // Prevent scrolling to bottom
-            tempTextArea.style.top = "0";
-            tempTextArea.style.left = "0";
-            tempTextArea.style.position = "fixed";
-            document.body.appendChild(tempTextArea);
-            tempTextArea.focus();
-            tempTextArea.select();
-
-            try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    showToastNotification();
-                } else {
-                    console.error('Gagal menyalin teks dengan standard command.');
-                }
-            } catch (err) {
-                console.error('Kesalahan penyalinan:', err);
-            }
-
-            document.body.removeChild(tempTextArea);
-        });
-
-        // Trigger premium dynamic toast animation
-        function showToastNotification() {
-            // Update button label state
-            const salinIcon = document.getElementById('salinIcon');
-            const salinLabel = document.getElementById('salinLabel');
-            
-            salinIcon.className = "fa-solid fa-check text-emerald-400";
-            salinLabel.innerText = "Tersalin!";
-            btnSalin.classList.remove('bg-indigo-600', 'hover:bg-indigo-500');
-            btnSalin.classList.add('bg-emerald-600/90', 'hover:bg-emerald-600');
-
-            // Slide up and reveal visual Toast box
-            toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
-            toast.classList.add('translate-y-0', 'opacity-100');
-
-            setTimeout(() => {
-                // Reset button state
-                salinIcon.className = "fa-regular fa-copy";
-                salinLabel.innerText = "Salin Prompt";
-                btnSalin.classList.remove('bg-emerald-600/90', 'hover:bg-emerald-600');
-                btnSalin.classList.add('bg-indigo-600', 'hover:bg-indigo-500');
-
-                // Dismiss Toast box
-                toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
-                toast.classList.remove('translate-y-0', 'opacity-100');
-            }, 3000);
-        }
-
-        // Initialize with default fields on load
-        window.onload = function() {
-            // Add initial empty fields
-            addProductImageField();
-            // Start compilation
-            updatePrompt();
+            feedbackReviewsList.forEach(review => {
+                const stars = "⭐".repeat(review.rating);
+                const itemEl = document.createElement('div');
+                itemEl.className = 'p-4 bg-zinc-900/40 border border-zinc-800/80 rounded-xl space-y-1.5 transition duration-300 hover:border-zinc-700';
+                itemEl.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-white">${review.name}</span>
+                        <span class="text-[10px] text-zinc-500">${review.date}</span>
+                    </div>
+                    <div class="text-[10px] text-yellow-400">${stars}</div>
+                    <p class="text-xs text-zinc-300 italic leading-relaxed">"${review.text}"</p>
+                `;
+                container.appendChild(itemEl);
+            });
         };
+
+        const handleReviewSubmit = (e) => {
+            e.preventDefault();
+            const nameInput = document.getElementById('reviewName');
+            const ratingInput = document.getElementById('reviewRating');
+            const textInput = document.getElementById('reviewText');
+
+            const newReview = {
+                name: nameInput.value.trim(),
+                rating: parseInt(ratingInput.value),
+                text: textInput.value.trim(),
+                date: "Baru saja"
+            };
+
+            feedbackReviewsList.unshift(newReview);
+            renderLiveReviews();
+            
+            // Clear inputs
+            nameInput.value = '';
+            textInput.value = '';
+            ratingInput.value = '5';
+
+            showToastNotification('Ulasan Terkirim', 'Terima kasih, ulasan Anda langsung tersimpan secara virtual.', 'check');
+        };
+        renderLiveReviews();
+
+        // Dynamic Client-side Shopping Cart Logic
+        let cartState = [];
+
+        const cartBtn = document.getElementById('cartBtn');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartDrawer = document.getElementById('cartDrawer');
+        const backdropOverlay = document.getElementById('backdropOverlay');
+
+        const openCartDrawer = () => {
+            cartDrawer.classList.remove('translate-x-full');
+            backdropOverlay.classList.remove('hidden');
+            setTimeout(() => backdropOverlay.classList.add('opacity-100'), 10);
+        };
+
+        const closeCartDrawer = () => {
+            cartDrawer.classList.add('translate-x-full');
+            backdropOverlay.classList.remove('opacity-100');
+            setTimeout(() => backdropOverlay.classList.add('hidden'), 300);
+        };
+
+        cartBtn.addEventListener('click', openCartDrawer);
+        closeCartBtn.addEventListener('click', closeCartDrawer);
+        backdropOverlay.addEventListener('click', closeCartDrawer);
+
+        // Format currency helper
+        const formatIDR = (num) => {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
+        };
+
+        // Toast notifications controller
+        const showToastNotification = (title, message, iconType) => {
+            const toast = document.getElementById('toastNotification');
+            const tTitle = document.getElementById('toastTitle');
+            const tMsg = document.getElementById('toastMessage');
+            
+            tTitle.textContent = title;
+            tMsg.textContent = message;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 4000);
+        };
+
+        const renderCartItems = () => {
+            const container = document.getElementById('cartItemsList');
+            const emptyMsg = document.getElementById('emptyCartMessage');
+            const checkoutArea = document.getElementById('cartCheckoutArea');
+            const badge = document.getElementById('cartCountBadge');
+            const totalVal = document.getElementById('cartTotalPrice');
+
+            // Render quantity badge
+            const totalQty = cartState.reduce((sum, item) => sum + item.quantity, 0);
+            if (totalQty > 0) {
+                badge.textContent = totalQty;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            // Remove previous items
+            const items = container.querySelectorAll('.cart-item-row');
+            items.forEach(el => el.remove());
+
+            if (cartState.length === 0) {
+                emptyMsg.classList.remove('hidden');
+                checkoutArea.classList.add('hidden');
+                return;
+            }
+
+            emptyMsg.classList.add('hidden');
+            checkoutArea.classList.remove('hidden');
+
+            let subtotal = 0;
+
+            cartState.forEach(item => {
+                subtotal += item.price * item.quantity;
+                const row = document.createElement('div');
+                row.className = 'cart-item-row p-4 bg-zinc-900/60 border border-zinc-800 rounded-xl flex items-center justify-between gap-3';
+                row.innerHTML = `
+                    <div class="flex-grow">
+                        <h4 class="text-xs font-bold text-white">${item.name}</h4>
+                        <span class="text-[10px] text-zinc-500">${formatIDR(item.price)} / unit</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center border border-zinc-800 rounded-lg bg-zinc-950 overflow-hidden">
+                            <button onclick="changeItemQty('${item.id}', -1)" class="px-2 py-1 text-zinc-500 hover:text-white transition text-xs font-bold">-</button>
+                            <span class="px-2 text-xs font-semibold text-white">${item.quantity}</span>
+                            <button onclick="changeItemQty('${item.id}', 1)" class="px-2 py-1 text-zinc-500 hover:text-white transition text-xs font-bold">+</button>
+                        </div>
+                        <button onclick="removeFromCart('${item.id}')" class="text-red-500/85 hover:text-red-400 transition p-1">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+                container.insertBefore(row, emptyMsg);
+            });
+
+            totalVal.textContent = formatIDR(subtotal);
+            lucide.createIcons(); // render dynamic trash icons
+        };
+
+        window.addToCart = (name, price, id) => {
+            const existing = cartState.find(item => item.id === id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cartState.push({ id, name, price, quantity: 1 });
+            }
+            renderCartItems();
+            showToastNotification('Ditambahkan ke Keranjang', `${name} berhasil masuk daftar pesanan.`, 'shopping-cart');
+            openCartDrawer();
+        };
+
+        window.removeFromCart = (id) => {
+            cartState = cartState.filter(item => item.id !== id);
+            renderCartItems();
+        };
+
+        window.changeItemQty = (id, change) => {
+            const item = cartState.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    renderCartItems();
+                }
+            }
+        };
+
+        // Form Checkout to WhatsApp Admin API
+        const handleCartCheckout = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('checkoutName').value.trim();
+            const date = document.getElementById('checkoutDate').value;
+            const notes = document.getElementById('checkoutNotes').value.trim();
+
+            if (cartState.length === 0) return;
+
+            let messageText = `Halo Admin AQUEST TECH,\nSaya ingin memesan paket layanan berikut:\n\n`;
+            let total = 0;
+
+            cartState.forEach((item, index) => {
+                const subTotal = item.price * item.quantity;
+                total += subTotal;
+                messageText += `${index + 1}. ${item.name} (${item.quantity}x) - ${formatIDR(subTotal)}\n`;
+            });
+
+            messageText += `\n*Total Tagihan:* ${formatIDR(total)}`;
+            messageText += `\n\n*Informasi Pemesan:*`;
+            messageText += `\n- Nama Lengkap: ${name}`;
+            messageText += `\n- Tanggal Event: ${date}`;
+            if (notes) {
+                messageText += `\n- Catatan Tambahan: ${notes}`;
+            }
+            messageText += `\n\nMohon untuk diproses lebih lanjut, terima kasih.`;
+
+            const waUrl = `https://wa.me/6281779993104?text=${encodeURIComponent(messageText)}`;
+            window.open(waUrl, '_blank');
+        };
+
+        // Window load initializers
+        window.onload = () => {
+            renderCartItems();
+        }
     </script>
 </body>
 </html>
